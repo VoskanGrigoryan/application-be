@@ -1,7 +1,6 @@
-// src/pets/pets.service.ts
 import { Injectable } from '@nestjs/common';
 import { CreatePetDto } from './dto/create-pet.dto';
-import { PrismaService } from 'prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class PetsService {
@@ -15,8 +14,12 @@ export class PetsService {
         gender: data.gender,
         person_id: BigInt(data.person_id),
         description: data.description,
-        trait_id: BigInt(data.trait_id),
         has_spotlight: data.has_spotlight,
+        traits: {
+          connect: data.trait_ids.map((id) => ({
+            id: BigInt(id),
+          })),
+        },
       },
     });
   }

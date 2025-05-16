@@ -1,4 +1,11 @@
-import { IsString, IsDateString, IsBoolean, IsInt } from 'class-validator';
+import {
+  IsString,
+  IsDateString,
+  IsBoolean,
+  IsInt,
+  IsArray,
+  ArrayNotEmpty,
+} from 'class-validator';
 
 export class CreatePetDto {
   @IsString()
@@ -16,9 +23,11 @@ export class CreatePetDto {
   @IsString()
   description: string;
 
-  @IsInt()
-  trait_id: number;
-
   @IsBoolean()
   has_spotlight: boolean;
+
+  @IsArray()
+  @ArrayNotEmpty()
+  @IsInt({ each: true })
+  trait_ids: number[];
 }

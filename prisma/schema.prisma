@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../src/generated"
 }
 
 datasource db {
@@ -18,14 +18,14 @@ model city {
 }
 
 model person {
-  id             BigInt    @id
+  id             BigInt    @id  @default(autoincrement())
   name           String    @db.VarChar(255)
   birth_date     DateTime  @db.Date
   gender         Int       @db.SmallInt
   address        String    @db.VarChar(255)
   city_id        BigInt
   phone          BigInt
-  last_active_at DateTime  @db.Timestamp(0)
+  last_active_at DateTime @db.Timestamp(0) @default(now())
   city           city      @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "person_city_id_foreign")
   pet            pet[]
   shelter        shelter[]
@@ -38,10 +38,10 @@ model pet {
   gender        Int      @db.SmallInt
   person_id     BigInt
   description   String   @db.VarChar(255)
-  trait_id      BigInt
   has_spotlight Boolean
+
   person        person   @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pet_person_id_foreign")
-  trait         trait    @relation(fields: [trait_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pet_trait_id_foreign")
+  traits        trait[]  // many-to-many relationship
 }
 
 model province {
@@ -61,8 +61,9 @@ model shelter {
 }
 
 model trait {
-  id   BigInt @id
-  name String @db.VarChar(255)
-  code Int    @db.SmallInt
-  pet  pet[]
+  id   BigInt  @id @default(autoincrement())
+  name String  @db.VarChar(255)
+  code Int     @db.SmallInt
+
+  pets pet[]   //  many-to-many relationship
 }

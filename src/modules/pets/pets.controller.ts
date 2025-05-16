@@ -7,7 +7,7 @@ import { CreatePetDto } from './dto/create-pet.dto';
 export class PetsController {
   constructor(private readonly petsService: PetsService) {}
 
-  @Post()
+  @Post("/create-pet")
   async create(@Body() createPetDto: CreatePetDto) {
     return this.petsService.create(createPetDto);
   }

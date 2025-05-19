@@ -17,8 +17,20 @@ export class CreatePetDto {
   @IsInt()
   gender: number;
 
+  @IsString()
+  species: string;
+
   @IsInt()
-  person_id: number;
+  weight: number;
+
+  @IsString()
+  hair_type: string;
+
+  @IsString()
+  hair_color: string;
+
+  @IsInt()
+  owner_id: number;
 
   @IsString()
   description: string;

@@ -120,6 +120,11 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.ProvinceScalarFieldEnum = {
+  id: 'id',
+  province: 'province'
+};
+
 exports.Prisma.CityScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -143,15 +148,14 @@ exports.Prisma.PetScalarFieldEnum = {
   name: 'name',
   birth_date: 'birth_date',
   gender: 'gender',
-  person_id: 'person_id',
+  species: 'species',
+  weight: 'weight',
+  hair_type: 'hair_type',
+  hair_color: 'hair_color',
+  owner_id: 'owner_id',
   description: 'description',
   has_spotlight: 'has_spotlight',
   is_on_adoption: 'is_on_adoption'
-};
-
-exports.Prisma.ProvinceScalarFieldEnum = {
-  id: 'id',
-  province: 'province'
 };
 
 exports.Prisma.ShelterScalarFieldEnum = {
@@ -184,10 +188,10 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
+  Province: 'Province',
   City: 'City',
   Person: 'Person',
   Pet: 'Pet',
-  Province: 'Province',
   Shelter: 'Shelter',
   Trait: 'Trait'
 };

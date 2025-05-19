@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Province
+ * 
+ */
+export type Province = $Result.DefaultSelection<Prisma.$ProvincePayload>
+/**
  * Model City
  * 
  */
@@ -28,11 +33,6 @@ export type Person = $Result.DefaultSelection<Prisma.$PersonPayload>
  * 
  */
 export type Pet = $Result.DefaultSelection<Prisma.$PetPayload>
-/**
- * Model Province
- * 
- */
-export type Province = $Result.DefaultSelection<Prisma.$ProvincePayload>
 /**
  * Model Shelter
  * 
@@ -51,8 +51,8 @@ export type Trait = $Result.DefaultSelection<Prisma.$TraitPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Cities
- * const cities = await prisma.city.findMany()
+ * // Fetch zero or more Provinces
+ * const provinces = await prisma.province.findMany()
  * ```
  *
  *
@@ -72,8 +72,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Cities
-   * const cities = await prisma.city.findMany()
+   * // Fetch zero or more Provinces
+   * const provinces = await prisma.province.findMany()
    * ```
    *
    *
@@ -170,6 +170,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.province`: Exposes CRUD operations for the **Province** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Provinces
+    * const provinces = await prisma.province.findMany()
+    * ```
+    */
+  get province(): Prisma.ProvinceDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.city`: Exposes CRUD operations for the **City** model.
     * Example usage:
     * ```ts
@@ -198,16 +208,6 @@ export class PrismaClient<
     * ```
     */
   get pet(): Prisma.PetDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.province`: Exposes CRUD operations for the **Province** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Provinces
-    * const provinces = await prisma.province.findMany()
-    * ```
-    */
-  get province(): Prisma.ProvinceDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.shelter`: Exposes CRUD operations for the **Shelter** model.
@@ -668,10 +668,10 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Province: 'Province',
     City: 'City',
     Person: 'Person',
     Pet: 'Pet',
-    Province: 'Province',
     Shelter: 'Shelter',
     Trait: 'Trait'
   };
@@ -692,10 +692,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "city" | "person" | "pet" | "province" | "shelter" | "trait"
+      modelProps: "province" | "city" | "person" | "pet" | "shelter" | "trait"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Province: {
+        payload: Prisma.$ProvincePayload<ExtArgs>
+        fields: Prisma.ProvinceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProvinceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProvinceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
+          }
+          findFirst: {
+            args: Prisma.ProvinceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProvinceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
+          }
+          findMany: {
+            args: Prisma.ProvinceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>[]
+          }
+          create: {
+            args: Prisma.ProvinceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
+          }
+          createMany: {
+            args: Prisma.ProvinceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProvinceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>[]
+          }
+          delete: {
+            args: Prisma.ProvinceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
+          }
+          update: {
+            args: Prisma.ProvinceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
+          }
+          deleteMany: {
+            args: Prisma.ProvinceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProvinceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProvinceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>[]
+          }
+          upsert: {
+            args: Prisma.ProvinceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
+          }
+          aggregate: {
+            args: Prisma.ProvinceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProvince>
+          }
+          groupBy: {
+            args: Prisma.ProvinceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProvinceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProvinceCountArgs<ExtArgs>
+            result: $Utils.Optional<ProvinceCountAggregateOutputType> | number
+          }
+        }
+      }
       City: {
         payload: Prisma.$CityPayload<ExtArgs>
         fields: Prisma.CityFieldRefs
@@ -915,80 +989,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PetCountArgs<ExtArgs>
             result: $Utils.Optional<PetCountAggregateOutputType> | number
-          }
-        }
-      }
-      Province: {
-        payload: Prisma.$ProvincePayload<ExtArgs>
-        fields: Prisma.ProvinceFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ProvinceFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ProvinceFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
-          }
-          findFirst: {
-            args: Prisma.ProvinceFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ProvinceFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
-          }
-          findMany: {
-            args: Prisma.ProvinceFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>[]
-          }
-          create: {
-            args: Prisma.ProvinceCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
-          }
-          createMany: {
-            args: Prisma.ProvinceCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.ProvinceCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>[]
-          }
-          delete: {
-            args: Prisma.ProvinceDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
-          }
-          update: {
-            args: Prisma.ProvinceUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
-          }
-          deleteMany: {
-            args: Prisma.ProvinceDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ProvinceUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.ProvinceUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>[]
-          }
-          upsert: {
-            args: Prisma.ProvinceUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProvincePayload>
-          }
-          aggregate: {
-            args: Prisma.ProvinceAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProvince>
-          }
-          groupBy: {
-            args: Prisma.ProvinceGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProvinceGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ProvinceCountArgs<ExtArgs>
-            result: $Utils.Optional<ProvinceCountAggregateOutputType> | number
           }
         }
       }
@@ -1224,10 +1224,10 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    province?: ProvinceOmit
     city?: CityOmit
     person?: PersonOmit
     pet?: PetOmit
-    province?: ProvinceOmit
     shelter?: ShelterOmit
     trait?: TraitOmit
   }
@@ -1317,6 +1317,37 @@ export namespace Prisma {
   /**
    * Count Types
    */
+
+
+  /**
+   * Count Type ProvinceCountOutputType
+   */
+
+  export type ProvinceCountOutputType = {
+    city: number
+  }
+
+  export type ProvinceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    city?: boolean | ProvinceCountOutputTypeCountCityArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProvinceCountOutputType without action
+   */
+  export type ProvinceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProvinceCountOutputType
+     */
+    select?: ProvinceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProvinceCountOutputType without action
+   */
+  export type ProvinceCountOutputTypeCountCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CityWhereInput
+  }
 
 
   /**
@@ -1422,37 +1453,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type ProvinceCountOutputType
-   */
-
-  export type ProvinceCountOutputType = {
-    city: number
-  }
-
-  export type ProvinceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    city?: boolean | ProvinceCountOutputTypeCountCityArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * ProvinceCountOutputType without action
-   */
-  export type ProvinceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProvinceCountOutputType
-     */
-    select?: ProvinceCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * ProvinceCountOutputType without action
-   */
-  export type ProvinceCountOutputTypeCountCityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: CityWhereInput
-  }
-
-
-  /**
    * Count Type ShelterCountOutputType
    */
 
@@ -1519,6 +1519,1071 @@ export namespace Prisma {
    */
 
   /**
+   * Model Province
+   */
+
+  export type AggregateProvince = {
+    _count: ProvinceCountAggregateOutputType | null
+    _avg: ProvinceAvgAggregateOutputType | null
+    _sum: ProvinceSumAggregateOutputType | null
+    _min: ProvinceMinAggregateOutputType | null
+    _max: ProvinceMaxAggregateOutputType | null
+  }
+
+  export type ProvinceAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProvinceSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ProvinceMinAggregateOutputType = {
+    id: number | null
+    province: string | null
+  }
+
+  export type ProvinceMaxAggregateOutputType = {
+    id: number | null
+    province: string | null
+  }
+
+  export type ProvinceCountAggregateOutputType = {
+    id: number
+    province: number
+    _all: number
+  }
+
+
+  export type ProvinceAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ProvinceSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ProvinceMinAggregateInputType = {
+    id?: true
+    province?: true
+  }
+
+  export type ProvinceMaxAggregateInputType = {
+    id?: true
+    province?: true
+  }
+
+  export type ProvinceCountAggregateInputType = {
+    id?: true
+    province?: true
+    _all?: true
+  }
+
+  export type ProvinceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Province to aggregate.
+     */
+    where?: ProvinceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Provinces to fetch.
+     */
+    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProvinceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Provinces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Provinces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Provinces
+    **/
+    _count?: true | ProvinceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProvinceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProvinceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProvinceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProvinceMaxAggregateInputType
+  }
+
+  export type GetProvinceAggregateType<T extends ProvinceAggregateArgs> = {
+        [P in keyof T & keyof AggregateProvince]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProvince[P]>
+      : GetScalarType<T[P], AggregateProvince[P]>
+  }
+
+
+
+
+  export type ProvinceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProvinceWhereInput
+    orderBy?: ProvinceOrderByWithAggregationInput | ProvinceOrderByWithAggregationInput[]
+    by: ProvinceScalarFieldEnum[] | ProvinceScalarFieldEnum
+    having?: ProvinceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProvinceCountAggregateInputType | true
+    _avg?: ProvinceAvgAggregateInputType
+    _sum?: ProvinceSumAggregateInputType
+    _min?: ProvinceMinAggregateInputType
+    _max?: ProvinceMaxAggregateInputType
+  }
+
+  export type ProvinceGroupByOutputType = {
+    id: number
+    province: string
+    _count: ProvinceCountAggregateOutputType | null
+    _avg: ProvinceAvgAggregateOutputType | null
+    _sum: ProvinceSumAggregateOutputType | null
+    _min: ProvinceMinAggregateOutputType | null
+    _max: ProvinceMaxAggregateOutputType | null
+  }
+
+  type GetProvinceGroupByPayload<T extends ProvinceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProvinceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProvinceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProvinceGroupByOutputType[P]>
+            : GetScalarType<T[P], ProvinceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProvinceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    province?: boolean
+    city?: boolean | Province$cityArgs<ExtArgs>
+    _count?: boolean | ProvinceCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["province"]>
+
+  export type ProvinceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    province?: boolean
+  }, ExtArgs["result"]["province"]>
+
+  export type ProvinceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    province?: boolean
+  }, ExtArgs["result"]["province"]>
+
+  export type ProvinceSelectScalar = {
+    id?: boolean
+    province?: boolean
+  }
+
+  export type ProvinceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "province", ExtArgs["result"]["province"]>
+  export type ProvinceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    city?: boolean | Province$cityArgs<ExtArgs>
+    _count?: boolean | ProvinceCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProvinceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProvinceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $ProvincePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Province"
+    objects: {
+      city: Prisma.$CityPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      province: string
+    }, ExtArgs["result"]["province"]>
+    composites: {}
+  }
+
+  type ProvinceGetPayload<S extends boolean | null | undefined | ProvinceDefaultArgs> = $Result.GetResult<Prisma.$ProvincePayload, S>
+
+  type ProvinceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProvinceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProvinceCountAggregateInputType | true
+    }
+
+  export interface ProvinceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Province'], meta: { name: 'Province' } }
+    /**
+     * Find zero or one Province that matches the filter.
+     * @param {ProvinceFindUniqueArgs} args - Arguments to find a Province
+     * @example
+     * // Get one Province
+     * const province = await prisma.province.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProvinceFindUniqueArgs>(args: SelectSubset<T, ProvinceFindUniqueArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Province that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProvinceFindUniqueOrThrowArgs} args - Arguments to find a Province
+     * @example
+     * // Get one Province
+     * const province = await prisma.province.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProvinceFindUniqueOrThrowArgs>(args: SelectSubset<T, ProvinceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Province that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceFindFirstArgs} args - Arguments to find a Province
+     * @example
+     * // Get one Province
+     * const province = await prisma.province.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProvinceFindFirstArgs>(args?: SelectSubset<T, ProvinceFindFirstArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Province that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceFindFirstOrThrowArgs} args - Arguments to find a Province
+     * @example
+     * // Get one Province
+     * const province = await prisma.province.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProvinceFindFirstOrThrowArgs>(args?: SelectSubset<T, ProvinceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Provinces that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Provinces
+     * const provinces = await prisma.province.findMany()
+     * 
+     * // Get first 10 Provinces
+     * const provinces = await prisma.province.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const provinceWithIdOnly = await prisma.province.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProvinceFindManyArgs>(args?: SelectSubset<T, ProvinceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Province.
+     * @param {ProvinceCreateArgs} args - Arguments to create a Province.
+     * @example
+     * // Create one Province
+     * const Province = await prisma.province.create({
+     *   data: {
+     *     // ... data to create a Province
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProvinceCreateArgs>(args: SelectSubset<T, ProvinceCreateArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Provinces.
+     * @param {ProvinceCreateManyArgs} args - Arguments to create many Provinces.
+     * @example
+     * // Create many Provinces
+     * const province = await prisma.province.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProvinceCreateManyArgs>(args?: SelectSubset<T, ProvinceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Provinces and returns the data saved in the database.
+     * @param {ProvinceCreateManyAndReturnArgs} args - Arguments to create many Provinces.
+     * @example
+     * // Create many Provinces
+     * const province = await prisma.province.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Provinces and only return the `id`
+     * const provinceWithIdOnly = await prisma.province.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProvinceCreateManyAndReturnArgs>(args?: SelectSubset<T, ProvinceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Province.
+     * @param {ProvinceDeleteArgs} args - Arguments to delete one Province.
+     * @example
+     * // Delete one Province
+     * const Province = await prisma.province.delete({
+     *   where: {
+     *     // ... filter to delete one Province
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProvinceDeleteArgs>(args: SelectSubset<T, ProvinceDeleteArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Province.
+     * @param {ProvinceUpdateArgs} args - Arguments to update one Province.
+     * @example
+     * // Update one Province
+     * const province = await prisma.province.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProvinceUpdateArgs>(args: SelectSubset<T, ProvinceUpdateArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Provinces.
+     * @param {ProvinceDeleteManyArgs} args - Arguments to filter Provinces to delete.
+     * @example
+     * // Delete a few Provinces
+     * const { count } = await prisma.province.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProvinceDeleteManyArgs>(args?: SelectSubset<T, ProvinceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Provinces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Provinces
+     * const province = await prisma.province.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProvinceUpdateManyArgs>(args: SelectSubset<T, ProvinceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Provinces and returns the data updated in the database.
+     * @param {ProvinceUpdateManyAndReturnArgs} args - Arguments to update many Provinces.
+     * @example
+     * // Update many Provinces
+     * const province = await prisma.province.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Provinces and only return the `id`
+     * const provinceWithIdOnly = await prisma.province.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProvinceUpdateManyAndReturnArgs>(args: SelectSubset<T, ProvinceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Province.
+     * @param {ProvinceUpsertArgs} args - Arguments to update or create a Province.
+     * @example
+     * // Update or create a Province
+     * const province = await prisma.province.upsert({
+     *   create: {
+     *     // ... data to create a Province
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Province we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProvinceUpsertArgs>(args: SelectSubset<T, ProvinceUpsertArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Provinces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceCountArgs} args - Arguments to filter Provinces to count.
+     * @example
+     * // Count the number of Provinces
+     * const count = await prisma.province.count({
+     *   where: {
+     *     // ... the filter for the Provinces we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProvinceCountArgs>(
+      args?: Subset<T, ProvinceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProvinceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Province.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProvinceAggregateArgs>(args: Subset<T, ProvinceAggregateArgs>): Prisma.PrismaPromise<GetProvinceAggregateType<T>>
+
+    /**
+     * Group by Province.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProvinceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProvinceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProvinceGroupByArgs['orderBy'] }
+        : { orderBy?: ProvinceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProvinceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProvinceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Province model
+   */
+  readonly fields: ProvinceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Province.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProvinceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    city<T extends Province$cityArgs<ExtArgs> = {}>(args?: Subset<T, Province$cityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Province model
+   */
+  interface ProvinceFieldRefs {
+    readonly id: FieldRef<"Province", 'Int'>
+    readonly province: FieldRef<"Province", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Province findUnique
+   */
+  export type ProvinceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * Filter, which Province to fetch.
+     */
+    where: ProvinceWhereUniqueInput
+  }
+
+  /**
+   * Province findUniqueOrThrow
+   */
+  export type ProvinceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * Filter, which Province to fetch.
+     */
+    where: ProvinceWhereUniqueInput
+  }
+
+  /**
+   * Province findFirst
+   */
+  export type ProvinceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * Filter, which Province to fetch.
+     */
+    where?: ProvinceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Provinces to fetch.
+     */
+    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Provinces.
+     */
+    cursor?: ProvinceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Provinces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Provinces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Provinces.
+     */
+    distinct?: ProvinceScalarFieldEnum | ProvinceScalarFieldEnum[]
+  }
+
+  /**
+   * Province findFirstOrThrow
+   */
+  export type ProvinceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * Filter, which Province to fetch.
+     */
+    where?: ProvinceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Provinces to fetch.
+     */
+    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Provinces.
+     */
+    cursor?: ProvinceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Provinces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Provinces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Provinces.
+     */
+    distinct?: ProvinceScalarFieldEnum | ProvinceScalarFieldEnum[]
+  }
+
+  /**
+   * Province findMany
+   */
+  export type ProvinceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * Filter, which Provinces to fetch.
+     */
+    where?: ProvinceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Provinces to fetch.
+     */
+    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Provinces.
+     */
+    cursor?: ProvinceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Provinces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Provinces.
+     */
+    skip?: number
+    distinct?: ProvinceScalarFieldEnum | ProvinceScalarFieldEnum[]
+  }
+
+  /**
+   * Province create
+   */
+  export type ProvinceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Province.
+     */
+    data: XOR<ProvinceCreateInput, ProvinceUncheckedCreateInput>
+  }
+
+  /**
+   * Province createMany
+   */
+  export type ProvinceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Provinces.
+     */
+    data: ProvinceCreateManyInput | ProvinceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Province createManyAndReturn
+   */
+  export type ProvinceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Provinces.
+     */
+    data: ProvinceCreateManyInput | ProvinceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Province update
+   */
+  export type ProvinceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Province.
+     */
+    data: XOR<ProvinceUpdateInput, ProvinceUncheckedUpdateInput>
+    /**
+     * Choose, which Province to update.
+     */
+    where: ProvinceWhereUniqueInput
+  }
+
+  /**
+   * Province updateMany
+   */
+  export type ProvinceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Provinces.
+     */
+    data: XOR<ProvinceUpdateManyMutationInput, ProvinceUncheckedUpdateManyInput>
+    /**
+     * Filter which Provinces to update
+     */
+    where?: ProvinceWhereInput
+    /**
+     * Limit how many Provinces to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Province updateManyAndReturn
+   */
+  export type ProvinceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * The data used to update Provinces.
+     */
+    data: XOR<ProvinceUpdateManyMutationInput, ProvinceUncheckedUpdateManyInput>
+    /**
+     * Filter which Provinces to update
+     */
+    where?: ProvinceWhereInput
+    /**
+     * Limit how many Provinces to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Province upsert
+   */
+  export type ProvinceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Province to update in case it exists.
+     */
+    where: ProvinceWhereUniqueInput
+    /**
+     * In case the Province found by the `where` argument doesn't exist, create a new Province with this data.
+     */
+    create: XOR<ProvinceCreateInput, ProvinceUncheckedCreateInput>
+    /**
+     * In case the Province was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProvinceUpdateInput, ProvinceUncheckedUpdateInput>
+  }
+
+  /**
+   * Province delete
+   */
+  export type ProvinceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+    /**
+     * Filter which Province to delete.
+     */
+    where: ProvinceWhereUniqueInput
+  }
+
+  /**
+   * Province deleteMany
+   */
+  export type ProvinceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Provinces to delete
+     */
+    where?: ProvinceWhereInput
+    /**
+     * Limit how many Provinces to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Province.city
+   */
+  export type Province$cityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the City
+     */
+    select?: CitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the City
+     */
+    omit?: CityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CityInclude<ExtArgs> | null
+    where?: CityWhereInput
+    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
+    cursor?: CityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
+  }
+
+  /**
+   * Province without action
+   */
+  export type ProvinceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Province
+     */
+    select?: ProvinceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Province
+     */
+    omit?: ProvinceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProvinceInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model City
    */
 
@@ -1536,20 +2601,20 @@ export namespace Prisma {
   }
 
   export type CitySumAggregateOutputType = {
-    id: bigint | null
-    province_id: bigint | null
+    id: number | null
+    province_id: number | null
   }
 
   export type CityMinAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
-    province_id: bigint | null
+    province_id: number | null
   }
 
   export type CityMaxAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
-    province_id: bigint | null
+    province_id: number | null
   }
 
   export type CityCountAggregateOutputType = {
@@ -1676,9 +2741,9 @@ export namespace Prisma {
   }
 
   export type CityGroupByOutputType = {
-    id: bigint
+    id: number
     name: string
-    province_id: bigint
+    province_id: number
     _count: CityCountAggregateOutputType | null
     _avg: CityAvgAggregateOutputType | null
     _sum: CitySumAggregateOutputType | null
@@ -1752,9 +2817,9 @@ export namespace Prisma {
       shelter: Prisma.$ShelterPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: bigint
+      id: number
       name: string
-      province_id: bigint
+      province_id: number
     }, ExtArgs["result"]["city"]>
     composites: {}
   }
@@ -2181,9 +3246,9 @@ export namespace Prisma {
    * Fields of the City model
    */
   interface CityFieldRefs {
-    readonly id: FieldRef<"City", 'BigInt'>
+    readonly id: FieldRef<"City", 'Int'>
     readonly name: FieldRef<"City", 'String'>
-    readonly province_id: FieldRef<"City", 'BigInt'>
+    readonly province_id: FieldRef<"City", 'Int'>
   }
     
 
@@ -2667,35 +3732,35 @@ export namespace Prisma {
   }
 
   export type PersonSumAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     gender: number | null
-    city_id: bigint | null
-    phone: bigint | null
-    shelter_id: bigint | null
+    city_id: number | null
+    phone: number | null
+    shelter_id: number | null
   }
 
   export type PersonMinAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     birth_date: Date | null
     gender: number | null
     address: string | null
-    city_id: bigint | null
-    phone: bigint | null
+    city_id: number | null
+    phone: number | null
     last_active_at: Date | null
-    shelter_id: bigint | null
+    shelter_id: number | null
   }
 
   export type PersonMaxAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     birth_date: Date | null
     gender: number | null
     address: string | null
-    city_id: bigint | null
-    phone: bigint | null
+    city_id: number | null
+    phone: number | null
     last_active_at: Date | null
-    shelter_id: bigint | null
+    shelter_id: number | null
   }
 
   export type PersonCountAggregateOutputType = {
@@ -2852,15 +3917,15 @@ export namespace Prisma {
   }
 
   export type PersonGroupByOutputType = {
-    id: bigint
+    id: number
     name: string
     birth_date: Date
     gender: number
     address: string
-    city_id: bigint
-    phone: bigint
+    city_id: number
+    phone: number
     last_active_at: Date
-    shelter_id: bigint | null
+    shelter_id: number | null
     _count: PersonCountAggregateOutputType | null
     _avg: PersonAvgAggregateOutputType | null
     _sum: PersonSumAggregateOutputType | null
@@ -2962,15 +4027,15 @@ export namespace Prisma {
       shelter: Prisma.$ShelterPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: bigint
+      id: number
       name: string
       birth_date: Date
       gender: number
       address: string
-      city_id: bigint
-      phone: bigint
+      city_id: number
+      phone: number
       last_active_at: Date
-      shelter_id: bigint | null
+      shelter_id: number | null
     }, ExtArgs["result"]["person"]>
     composites: {}
   }
@@ -3397,15 +4462,15 @@ export namespace Prisma {
    * Fields of the Person model
    */
   interface PersonFieldRefs {
-    readonly id: FieldRef<"Person", 'BigInt'>
+    readonly id: FieldRef<"Person", 'Int'>
     readonly name: FieldRef<"Person", 'String'>
     readonly birth_date: FieldRef<"Person", 'DateTime'>
     readonly gender: FieldRef<"Person", 'Int'>
     readonly address: FieldRef<"Person", 'String'>
-    readonly city_id: FieldRef<"Person", 'BigInt'>
-    readonly phone: FieldRef<"Person", 'BigInt'>
+    readonly city_id: FieldRef<"Person", 'Int'>
+    readonly phone: FieldRef<"Person", 'Int'>
     readonly last_active_at: FieldRef<"Person", 'DateTime'>
-    readonly shelter_id: FieldRef<"Person", 'BigInt'>
+    readonly shelter_id: FieldRef<"Person", 'Int'>
   }
     
 
@@ -3878,32 +4943,42 @@ export namespace Prisma {
   export type PetAvgAggregateOutputType = {
     id: number | null
     gender: number | null
-    person_id: number | null
+    weight: number | null
+    owner_id: number | null
   }
 
   export type PetSumAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     gender: number | null
-    person_id: bigint | null
+    weight: number | null
+    owner_id: number | null
   }
 
   export type PetMinAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     birth_date: Date | null
     gender: number | null
-    person_id: bigint | null
+    species: string | null
+    weight: number | null
+    hair_type: string | null
+    hair_color: string | null
+    owner_id: number | null
     description: string | null
     has_spotlight: boolean | null
     is_on_adoption: boolean | null
   }
 
   export type PetMaxAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     birth_date: Date | null
     gender: number | null
-    person_id: bigint | null
+    species: string | null
+    weight: number | null
+    hair_type: string | null
+    hair_color: string | null
+    owner_id: number | null
     description: string | null
     has_spotlight: boolean | null
     is_on_adoption: boolean | null
@@ -3914,7 +4989,11 @@ export namespace Prisma {
     name: number
     birth_date: number
     gender: number
-    person_id: number
+    species: number
+    weight: number
+    hair_type: number
+    hair_color: number
+    owner_id: number
     description: number
     has_spotlight: number
     is_on_adoption: number
@@ -3925,13 +5004,15 @@ export namespace Prisma {
   export type PetAvgAggregateInputType = {
     id?: true
     gender?: true
-    person_id?: true
+    weight?: true
+    owner_id?: true
   }
 
   export type PetSumAggregateInputType = {
     id?: true
     gender?: true
-    person_id?: true
+    weight?: true
+    owner_id?: true
   }
 
   export type PetMinAggregateInputType = {
@@ -3939,7 +5020,11 @@ export namespace Prisma {
     name?: true
     birth_date?: true
     gender?: true
-    person_id?: true
+    species?: true
+    weight?: true
+    hair_type?: true
+    hair_color?: true
+    owner_id?: true
     description?: true
     has_spotlight?: true
     is_on_adoption?: true
@@ -3950,7 +5035,11 @@ export namespace Prisma {
     name?: true
     birth_date?: true
     gender?: true
-    person_id?: true
+    species?: true
+    weight?: true
+    hair_type?: true
+    hair_color?: true
+    owner_id?: true
     description?: true
     has_spotlight?: true
     is_on_adoption?: true
@@ -3961,7 +5050,11 @@ export namespace Prisma {
     name?: true
     birth_date?: true
     gender?: true
-    person_id?: true
+    species?: true
+    weight?: true
+    hair_type?: true
+    hair_color?: true
+    owner_id?: true
     description?: true
     has_spotlight?: true
     is_on_adoption?: true
@@ -4055,11 +5148,15 @@ export namespace Prisma {
   }
 
   export type PetGroupByOutputType = {
-    id: bigint
+    id: number
     name: string
     birth_date: Date
     gender: number
-    person_id: bigint
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    owner_id: number
     description: string
     has_spotlight: boolean
     is_on_adoption: boolean
@@ -4089,11 +5186,15 @@ export namespace Prisma {
     name?: boolean
     birth_date?: boolean
     gender?: boolean
-    person_id?: boolean
+    species?: boolean
+    weight?: boolean
+    hair_type?: boolean
+    hair_color?: boolean
+    owner_id?: boolean
     description?: boolean
     has_spotlight?: boolean
     is_on_adoption?: boolean
-    person?: boolean | PersonDefaultArgs<ExtArgs>
+    owned_by?: boolean | PersonDefaultArgs<ExtArgs>
     traits?: boolean | Pet$traitsArgs<ExtArgs>
     _count?: boolean | PetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pet"]>
@@ -4103,11 +5204,15 @@ export namespace Prisma {
     name?: boolean
     birth_date?: boolean
     gender?: boolean
-    person_id?: boolean
+    species?: boolean
+    weight?: boolean
+    hair_type?: boolean
+    hair_color?: boolean
+    owner_id?: boolean
     description?: boolean
     has_spotlight?: boolean
     is_on_adoption?: boolean
-    person?: boolean | PersonDefaultArgs<ExtArgs>
+    owned_by?: boolean | PersonDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pet"]>
 
   export type PetSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4115,11 +5220,15 @@ export namespace Prisma {
     name?: boolean
     birth_date?: boolean
     gender?: boolean
-    person_id?: boolean
+    species?: boolean
+    weight?: boolean
+    hair_type?: boolean
+    hair_color?: boolean
+    owner_id?: boolean
     description?: boolean
     has_spotlight?: boolean
     is_on_adoption?: boolean
-    person?: boolean | PersonDefaultArgs<ExtArgs>
+    owned_by?: boolean | PersonDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["pet"]>
 
   export type PetSelectScalar = {
@@ -4127,37 +5236,45 @@ export namespace Prisma {
     name?: boolean
     birth_date?: boolean
     gender?: boolean
-    person_id?: boolean
+    species?: boolean
+    weight?: boolean
+    hair_type?: boolean
+    hair_color?: boolean
+    owner_id?: boolean
     description?: boolean
     has_spotlight?: boolean
     is_on_adoption?: boolean
   }
 
-  export type PetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "birth_date" | "gender" | "person_id" | "description" | "has_spotlight" | "is_on_adoption", ExtArgs["result"]["pet"]>
+  export type PetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "birth_date" | "gender" | "species" | "weight" | "hair_type" | "hair_color" | "owner_id" | "description" | "has_spotlight" | "is_on_adoption", ExtArgs["result"]["pet"]>
   export type PetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    person?: boolean | PersonDefaultArgs<ExtArgs>
+    owned_by?: boolean | PersonDefaultArgs<ExtArgs>
     traits?: boolean | Pet$traitsArgs<ExtArgs>
     _count?: boolean | PetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    person?: boolean | PersonDefaultArgs<ExtArgs>
+    owned_by?: boolean | PersonDefaultArgs<ExtArgs>
   }
   export type PetIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    person?: boolean | PersonDefaultArgs<ExtArgs>
+    owned_by?: boolean | PersonDefaultArgs<ExtArgs>
   }
 
   export type $PetPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Pet"
     objects: {
-      person: Prisma.$PersonPayload<ExtArgs>
+      owned_by: Prisma.$PersonPayload<ExtArgs>
       traits: Prisma.$TraitPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: bigint
+      id: number
       name: string
       birth_date: Date
       gender: number
-      person_id: bigint
+      species: string
+      weight: number
+      hair_type: string
+      hair_color: string
+      owner_id: number
       description: string
       has_spotlight: boolean
       is_on_adoption: boolean
@@ -4555,7 +5672,7 @@ export namespace Prisma {
    */
   export interface Prisma__PetClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    person<T extends PersonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonDefaultArgs<ExtArgs>>): Prisma__PersonClient<$Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    owned_by<T extends PersonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PersonDefaultArgs<ExtArgs>>): Prisma__PersonClient<$Result.GetResult<Prisma.$PersonPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     traits<T extends Pet$traitsArgs<ExtArgs> = {}>(args?: Subset<T, Pet$traitsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TraitPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4586,11 +5703,15 @@ export namespace Prisma {
    * Fields of the Pet model
    */
   interface PetFieldRefs {
-    readonly id: FieldRef<"Pet", 'BigInt'>
+    readonly id: FieldRef<"Pet", 'Int'>
     readonly name: FieldRef<"Pet", 'String'>
     readonly birth_date: FieldRef<"Pet", 'DateTime'>
     readonly gender: FieldRef<"Pet", 'Int'>
-    readonly person_id: FieldRef<"Pet", 'BigInt'>
+    readonly species: FieldRef<"Pet", 'String'>
+    readonly weight: FieldRef<"Pet", 'Int'>
+    readonly hair_type: FieldRef<"Pet", 'String'>
+    readonly hair_color: FieldRef<"Pet", 'String'>
+    readonly owner_id: FieldRef<"Pet", 'Int'>
     readonly description: FieldRef<"Pet", 'String'>
     readonly has_spotlight: FieldRef<"Pet", 'Boolean'>
     readonly is_on_adoption: FieldRef<"Pet", 'Boolean'>
@@ -5033,1071 +6154,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Province
-   */
-
-  export type AggregateProvince = {
-    _count: ProvinceCountAggregateOutputType | null
-    _avg: ProvinceAvgAggregateOutputType | null
-    _sum: ProvinceSumAggregateOutputType | null
-    _min: ProvinceMinAggregateOutputType | null
-    _max: ProvinceMaxAggregateOutputType | null
-  }
-
-  export type ProvinceAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type ProvinceSumAggregateOutputType = {
-    id: bigint | null
-  }
-
-  export type ProvinceMinAggregateOutputType = {
-    id: bigint | null
-    province: string | null
-  }
-
-  export type ProvinceMaxAggregateOutputType = {
-    id: bigint | null
-    province: string | null
-  }
-
-  export type ProvinceCountAggregateOutputType = {
-    id: number
-    province: number
-    _all: number
-  }
-
-
-  export type ProvinceAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type ProvinceSumAggregateInputType = {
-    id?: true
-  }
-
-  export type ProvinceMinAggregateInputType = {
-    id?: true
-    province?: true
-  }
-
-  export type ProvinceMaxAggregateInputType = {
-    id?: true
-    province?: true
-  }
-
-  export type ProvinceCountAggregateInputType = {
-    id?: true
-    province?: true
-    _all?: true
-  }
-
-  export type ProvinceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Province to aggregate.
-     */
-    where?: ProvinceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Provinces to fetch.
-     */
-    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ProvinceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Provinces from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Provinces.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Provinces
-    **/
-    _count?: true | ProvinceCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ProvinceAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ProvinceSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ProvinceMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ProvinceMaxAggregateInputType
-  }
-
-  export type GetProvinceAggregateType<T extends ProvinceAggregateArgs> = {
-        [P in keyof T & keyof AggregateProvince]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateProvince[P]>
-      : GetScalarType<T[P], AggregateProvince[P]>
-  }
-
-
-
-
-  export type ProvinceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProvinceWhereInput
-    orderBy?: ProvinceOrderByWithAggregationInput | ProvinceOrderByWithAggregationInput[]
-    by: ProvinceScalarFieldEnum[] | ProvinceScalarFieldEnum
-    having?: ProvinceScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ProvinceCountAggregateInputType | true
-    _avg?: ProvinceAvgAggregateInputType
-    _sum?: ProvinceSumAggregateInputType
-    _min?: ProvinceMinAggregateInputType
-    _max?: ProvinceMaxAggregateInputType
-  }
-
-  export type ProvinceGroupByOutputType = {
-    id: bigint
-    province: string
-    _count: ProvinceCountAggregateOutputType | null
-    _avg: ProvinceAvgAggregateOutputType | null
-    _sum: ProvinceSumAggregateOutputType | null
-    _min: ProvinceMinAggregateOutputType | null
-    _max: ProvinceMaxAggregateOutputType | null
-  }
-
-  type GetProvinceGroupByPayload<T extends ProvinceGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ProvinceGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ProvinceGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProvinceGroupByOutputType[P]>
-            : GetScalarType<T[P], ProvinceGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ProvinceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    province?: boolean
-    city?: boolean | Province$cityArgs<ExtArgs>
-    _count?: boolean | ProvinceCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["province"]>
-
-  export type ProvinceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    province?: boolean
-  }, ExtArgs["result"]["province"]>
-
-  export type ProvinceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    province?: boolean
-  }, ExtArgs["result"]["province"]>
-
-  export type ProvinceSelectScalar = {
-    id?: boolean
-    province?: boolean
-  }
-
-  export type ProvinceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "province", ExtArgs["result"]["province"]>
-  export type ProvinceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    city?: boolean | Province$cityArgs<ExtArgs>
-    _count?: boolean | ProvinceCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type ProvinceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type ProvinceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $ProvincePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Province"
-    objects: {
-      city: Prisma.$CityPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: bigint
-      province: string
-    }, ExtArgs["result"]["province"]>
-    composites: {}
-  }
-
-  type ProvinceGetPayload<S extends boolean | null | undefined | ProvinceDefaultArgs> = $Result.GetResult<Prisma.$ProvincePayload, S>
-
-  type ProvinceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProvinceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProvinceCountAggregateInputType | true
-    }
-
-  export interface ProvinceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Province'], meta: { name: 'Province' } }
-    /**
-     * Find zero or one Province that matches the filter.
-     * @param {ProvinceFindUniqueArgs} args - Arguments to find a Province
-     * @example
-     * // Get one Province
-     * const province = await prisma.province.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ProvinceFindUniqueArgs>(args: SelectSubset<T, ProvinceFindUniqueArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Province that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ProvinceFindUniqueOrThrowArgs} args - Arguments to find a Province
-     * @example
-     * // Get one Province
-     * const province = await prisma.province.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ProvinceFindUniqueOrThrowArgs>(args: SelectSubset<T, ProvinceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Province that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceFindFirstArgs} args - Arguments to find a Province
-     * @example
-     * // Get one Province
-     * const province = await prisma.province.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ProvinceFindFirstArgs>(args?: SelectSubset<T, ProvinceFindFirstArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Province that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceFindFirstOrThrowArgs} args - Arguments to find a Province
-     * @example
-     * // Get one Province
-     * const province = await prisma.province.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ProvinceFindFirstOrThrowArgs>(args?: SelectSubset<T, ProvinceFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Provinces that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Provinces
-     * const provinces = await prisma.province.findMany()
-     * 
-     * // Get first 10 Provinces
-     * const provinces = await prisma.province.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const provinceWithIdOnly = await prisma.province.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ProvinceFindManyArgs>(args?: SelectSubset<T, ProvinceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Province.
-     * @param {ProvinceCreateArgs} args - Arguments to create a Province.
-     * @example
-     * // Create one Province
-     * const Province = await prisma.province.create({
-     *   data: {
-     *     // ... data to create a Province
-     *   }
-     * })
-     * 
-     */
-    create<T extends ProvinceCreateArgs>(args: SelectSubset<T, ProvinceCreateArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Provinces.
-     * @param {ProvinceCreateManyArgs} args - Arguments to create many Provinces.
-     * @example
-     * // Create many Provinces
-     * const province = await prisma.province.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ProvinceCreateManyArgs>(args?: SelectSubset<T, ProvinceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Provinces and returns the data saved in the database.
-     * @param {ProvinceCreateManyAndReturnArgs} args - Arguments to create many Provinces.
-     * @example
-     * // Create many Provinces
-     * const province = await prisma.province.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Provinces and only return the `id`
-     * const provinceWithIdOnly = await prisma.province.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends ProvinceCreateManyAndReturnArgs>(args?: SelectSubset<T, ProvinceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Province.
-     * @param {ProvinceDeleteArgs} args - Arguments to delete one Province.
-     * @example
-     * // Delete one Province
-     * const Province = await prisma.province.delete({
-     *   where: {
-     *     // ... filter to delete one Province
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ProvinceDeleteArgs>(args: SelectSubset<T, ProvinceDeleteArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Province.
-     * @param {ProvinceUpdateArgs} args - Arguments to update one Province.
-     * @example
-     * // Update one Province
-     * const province = await prisma.province.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ProvinceUpdateArgs>(args: SelectSubset<T, ProvinceUpdateArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Provinces.
-     * @param {ProvinceDeleteManyArgs} args - Arguments to filter Provinces to delete.
-     * @example
-     * // Delete a few Provinces
-     * const { count } = await prisma.province.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ProvinceDeleteManyArgs>(args?: SelectSubset<T, ProvinceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Provinces.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Provinces
-     * const province = await prisma.province.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ProvinceUpdateManyArgs>(args: SelectSubset<T, ProvinceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Provinces and returns the data updated in the database.
-     * @param {ProvinceUpdateManyAndReturnArgs} args - Arguments to update many Provinces.
-     * @example
-     * // Update many Provinces
-     * const province = await prisma.province.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Provinces and only return the `id`
-     * const provinceWithIdOnly = await prisma.province.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends ProvinceUpdateManyAndReturnArgs>(args: SelectSubset<T, ProvinceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Province.
-     * @param {ProvinceUpsertArgs} args - Arguments to update or create a Province.
-     * @example
-     * // Update or create a Province
-     * const province = await prisma.province.upsert({
-     *   create: {
-     *     // ... data to create a Province
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Province we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ProvinceUpsertArgs>(args: SelectSubset<T, ProvinceUpsertArgs<ExtArgs>>): Prisma__ProvinceClient<$Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Provinces.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceCountArgs} args - Arguments to filter Provinces to count.
-     * @example
-     * // Count the number of Provinces
-     * const count = await prisma.province.count({
-     *   where: {
-     *     // ... the filter for the Provinces we want to count
-     *   }
-     * })
-    **/
-    count<T extends ProvinceCountArgs>(
-      args?: Subset<T, ProvinceCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ProvinceCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Province.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ProvinceAggregateArgs>(args: Subset<T, ProvinceAggregateArgs>): Prisma.PrismaPromise<GetProvinceAggregateType<T>>
-
-    /**
-     * Group by Province.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProvinceGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ProvinceGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProvinceGroupByArgs['orderBy'] }
-        : { orderBy?: ProvinceGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ProvinceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProvinceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Province model
-   */
-  readonly fields: ProvinceFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Province.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ProvinceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    city<T extends Province$cityArgs<ExtArgs> = {}>(args?: Subset<T, Province$cityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Province model
-   */
-  interface ProvinceFieldRefs {
-    readonly id: FieldRef<"Province", 'BigInt'>
-    readonly province: FieldRef<"Province", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Province findUnique
-   */
-  export type ProvinceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * Filter, which Province to fetch.
-     */
-    where: ProvinceWhereUniqueInput
-  }
-
-  /**
-   * Province findUniqueOrThrow
-   */
-  export type ProvinceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * Filter, which Province to fetch.
-     */
-    where: ProvinceWhereUniqueInput
-  }
-
-  /**
-   * Province findFirst
-   */
-  export type ProvinceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * Filter, which Province to fetch.
-     */
-    where?: ProvinceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Provinces to fetch.
-     */
-    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Provinces.
-     */
-    cursor?: ProvinceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Provinces from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Provinces.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Provinces.
-     */
-    distinct?: ProvinceScalarFieldEnum | ProvinceScalarFieldEnum[]
-  }
-
-  /**
-   * Province findFirstOrThrow
-   */
-  export type ProvinceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * Filter, which Province to fetch.
-     */
-    where?: ProvinceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Provinces to fetch.
-     */
-    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Provinces.
-     */
-    cursor?: ProvinceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Provinces from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Provinces.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Provinces.
-     */
-    distinct?: ProvinceScalarFieldEnum | ProvinceScalarFieldEnum[]
-  }
-
-  /**
-   * Province findMany
-   */
-  export type ProvinceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * Filter, which Provinces to fetch.
-     */
-    where?: ProvinceWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Provinces to fetch.
-     */
-    orderBy?: ProvinceOrderByWithRelationInput | ProvinceOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Provinces.
-     */
-    cursor?: ProvinceWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Provinces from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Provinces.
-     */
-    skip?: number
-    distinct?: ProvinceScalarFieldEnum | ProvinceScalarFieldEnum[]
-  }
-
-  /**
-   * Province create
-   */
-  export type ProvinceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Province.
-     */
-    data: XOR<ProvinceCreateInput, ProvinceUncheckedCreateInput>
-  }
-
-  /**
-   * Province createMany
-   */
-  export type ProvinceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Provinces.
-     */
-    data: ProvinceCreateManyInput | ProvinceCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Province createManyAndReturn
-   */
-  export type ProvinceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * The data used to create many Provinces.
-     */
-    data: ProvinceCreateManyInput | ProvinceCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Province update
-   */
-  export type ProvinceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Province.
-     */
-    data: XOR<ProvinceUpdateInput, ProvinceUncheckedUpdateInput>
-    /**
-     * Choose, which Province to update.
-     */
-    where: ProvinceWhereUniqueInput
-  }
-
-  /**
-   * Province updateMany
-   */
-  export type ProvinceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Provinces.
-     */
-    data: XOR<ProvinceUpdateManyMutationInput, ProvinceUncheckedUpdateManyInput>
-    /**
-     * Filter which Provinces to update
-     */
-    where?: ProvinceWhereInput
-    /**
-     * Limit how many Provinces to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Province updateManyAndReturn
-   */
-  export type ProvinceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * The data used to update Provinces.
-     */
-    data: XOR<ProvinceUpdateManyMutationInput, ProvinceUncheckedUpdateManyInput>
-    /**
-     * Filter which Provinces to update
-     */
-    where?: ProvinceWhereInput
-    /**
-     * Limit how many Provinces to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Province upsert
-   */
-  export type ProvinceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Province to update in case it exists.
-     */
-    where: ProvinceWhereUniqueInput
-    /**
-     * In case the Province found by the `where` argument doesn't exist, create a new Province with this data.
-     */
-    create: XOR<ProvinceCreateInput, ProvinceUncheckedCreateInput>
-    /**
-     * In case the Province was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ProvinceUpdateInput, ProvinceUncheckedUpdateInput>
-  }
-
-  /**
-   * Province delete
-   */
-  export type ProvinceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-    /**
-     * Filter which Province to delete.
-     */
-    where: ProvinceWhereUniqueInput
-  }
-
-  /**
-   * Province deleteMany
-   */
-  export type ProvinceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Provinces to delete
-     */
-    where?: ProvinceWhereInput
-    /**
-     * Limit how many Provinces to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Province.city
-   */
-  export type Province$cityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the City
-     */
-    select?: CitySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the City
-     */
-    omit?: CityOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CityInclude<ExtArgs> | null
-    where?: CityWhereInput
-    orderBy?: CityOrderByWithRelationInput | CityOrderByWithRelationInput[]
-    cursor?: CityWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: CityScalarFieldEnum | CityScalarFieldEnum[]
-  }
-
-  /**
-   * Province without action
-   */
-  export type ProvinceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Province
-     */
-    select?: ProvinceSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Province
-     */
-    omit?: ProvinceOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProvinceInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Shelter
    */
 
@@ -6115,22 +6171,22 @@ export namespace Prisma {
   }
 
   export type ShelterSumAggregateOutputType = {
-    id: bigint | null
-    city_id: bigint | null
+    id: number | null
+    city_id: number | null
   }
 
   export type ShelterMinAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     address: string | null
-    city_id: bigint | null
+    city_id: number | null
   }
 
   export type ShelterMaxAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     address: string | null
-    city_id: bigint | null
+    city_id: number | null
   }
 
   export type ShelterCountAggregateOutputType = {
@@ -6261,10 +6317,10 @@ export namespace Prisma {
   }
 
   export type ShelterGroupByOutputType = {
-    id: bigint
+    id: number
     name: string
     address: string
-    city_id: bigint
+    city_id: number
     _count: ShelterCountAggregateOutputType | null
     _avg: ShelterAvgAggregateOutputType | null
     _sum: ShelterSumAggregateOutputType | null
@@ -6339,10 +6395,10 @@ export namespace Prisma {
       persons: Prisma.$PersonPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: bigint
+      id: number
       name: string
       address: string
-      city_id: bigint
+      city_id: number
     }, ExtArgs["result"]["shelter"]>
     composites: {}
   }
@@ -6768,10 +6824,10 @@ export namespace Prisma {
    * Fields of the Shelter model
    */
   interface ShelterFieldRefs {
-    readonly id: FieldRef<"Shelter", 'BigInt'>
+    readonly id: FieldRef<"Shelter", 'Int'>
     readonly name: FieldRef<"Shelter", 'String'>
     readonly address: FieldRef<"Shelter", 'String'>
-    readonly city_id: FieldRef<"Shelter", 'BigInt'>
+    readonly city_id: FieldRef<"Shelter", 'Int'>
   }
     
 
@@ -7228,18 +7284,18 @@ export namespace Prisma {
   }
 
   export type TraitSumAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     code: number | null
   }
 
   export type TraitMinAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     code: number | null
   }
 
   export type TraitMaxAggregateOutputType = {
-    id: bigint | null
+    id: number | null
     name: string | null
     code: number | null
   }
@@ -7368,7 +7424,7 @@ export namespace Prisma {
   }
 
   export type TraitGroupByOutputType = {
-    id: bigint
+    id: number
     name: string
     code: number
     _count: TraitCountAggregateOutputType | null
@@ -7432,7 +7488,7 @@ export namespace Prisma {
       pets: Prisma.$PetPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: bigint
+      id: number
       name: string
       code: number
     }, ExtArgs["result"]["trait"]>
@@ -7859,7 +7915,7 @@ export namespace Prisma {
    * Fields of the Trait model
    */
   interface TraitFieldRefs {
-    readonly id: FieldRef<"Trait", 'BigInt'>
+    readonly id: FieldRef<"Trait", 'Int'>
     readonly name: FieldRef<"Trait", 'String'>
     readonly code: FieldRef<"Trait", 'Int'>
   }
@@ -8306,6 +8362,14 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const ProvinceScalarFieldEnum: {
+    id: 'id',
+    province: 'province'
+  };
+
+  export type ProvinceScalarFieldEnum = (typeof ProvinceScalarFieldEnum)[keyof typeof ProvinceScalarFieldEnum]
+
+
   export const CityScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -8335,21 +8399,17 @@ export namespace Prisma {
     name: 'name',
     birth_date: 'birth_date',
     gender: 'gender',
-    person_id: 'person_id',
+    species: 'species',
+    weight: 'weight',
+    hair_type: 'hair_type',
+    hair_color: 'hair_color',
+    owner_id: 'owner_id',
     description: 'description',
     has_spotlight: 'has_spotlight',
     is_on_adoption: 'is_on_adoption'
   };
 
   export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
-
-
-  export const ProvinceScalarFieldEnum: {
-    id: 'id',
-    province: 'province'
-  };
-
-  export type ProvinceScalarFieldEnum = (typeof ProvinceScalarFieldEnum)[keyof typeof ProvinceScalarFieldEnum]
 
 
   export const ShelterScalarFieldEnum: {
@@ -8401,16 +8461,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'BigInt'
+   * Reference to a field of type 'Int'
    */
-  export type BigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt'>
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
 
 
   /**
-   * Reference to a field of type 'BigInt[]'
+   * Reference to a field of type 'Int[]'
    */
-  export type ListBigIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BigInt[]'>
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
 
 
@@ -8443,20 +8503,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -8480,13 +8526,55 @@ export namespace Prisma {
    */
 
 
+  export type ProvinceWhereInput = {
+    AND?: ProvinceWhereInput | ProvinceWhereInput[]
+    OR?: ProvinceWhereInput[]
+    NOT?: ProvinceWhereInput | ProvinceWhereInput[]
+    id?: IntFilter<"Province"> | number
+    province?: StringFilter<"Province"> | string
+    city?: CityListRelationFilter
+  }
+
+  export type ProvinceOrderByWithRelationInput = {
+    id?: SortOrder
+    province?: SortOrder
+    city?: CityOrderByRelationAggregateInput
+  }
+
+  export type ProvinceWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ProvinceWhereInput | ProvinceWhereInput[]
+    OR?: ProvinceWhereInput[]
+    NOT?: ProvinceWhereInput | ProvinceWhereInput[]
+    province?: StringFilter<"Province"> | string
+    city?: CityListRelationFilter
+  }, "id">
+
+  export type ProvinceOrderByWithAggregationInput = {
+    id?: SortOrder
+    province?: SortOrder
+    _count?: ProvinceCountOrderByAggregateInput
+    _avg?: ProvinceAvgOrderByAggregateInput
+    _max?: ProvinceMaxOrderByAggregateInput
+    _min?: ProvinceMinOrderByAggregateInput
+    _sum?: ProvinceSumOrderByAggregateInput
+  }
+
+  export type ProvinceScalarWhereWithAggregatesInput = {
+    AND?: ProvinceScalarWhereWithAggregatesInput | ProvinceScalarWhereWithAggregatesInput[]
+    OR?: ProvinceScalarWhereWithAggregatesInput[]
+    NOT?: ProvinceScalarWhereWithAggregatesInput | ProvinceScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Province"> | number
+    province?: StringWithAggregatesFilter<"Province"> | string
+  }
+
   export type CityWhereInput = {
     AND?: CityWhereInput | CityWhereInput[]
     OR?: CityWhereInput[]
     NOT?: CityWhereInput | CityWhereInput[]
-    id?: BigIntFilter<"City"> | bigint | number
+    id?: IntFilter<"City"> | number
     name?: StringFilter<"City"> | string
-    province_id?: BigIntFilter<"City"> | bigint | number
+    province_id?: IntFilter<"City"> | number
     province?: XOR<ProvinceScalarRelationFilter, ProvinceWhereInput>
     person?: PersonListRelationFilter
     shelter?: ShelterListRelationFilter
@@ -8502,12 +8590,12 @@ export namespace Prisma {
   }
 
   export type CityWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
+    id?: number
     AND?: CityWhereInput | CityWhereInput[]
     OR?: CityWhereInput[]
     NOT?: CityWhereInput | CityWhereInput[]
     name?: StringFilter<"City"> | string
-    province_id?: BigIntFilter<"City"> | bigint | number
+    province_id?: IntFilter<"City"> | number
     province?: XOR<ProvinceScalarRelationFilter, ProvinceWhereInput>
     person?: PersonListRelationFilter
     shelter?: ShelterListRelationFilter
@@ -8528,24 +8616,24 @@ export namespace Prisma {
     AND?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
     OR?: CityScalarWhereWithAggregatesInput[]
     NOT?: CityScalarWhereWithAggregatesInput | CityScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"City"> | bigint | number
+    id?: IntWithAggregatesFilter<"City"> | number
     name?: StringWithAggregatesFilter<"City"> | string
-    province_id?: BigIntWithAggregatesFilter<"City"> | bigint | number
+    province_id?: IntWithAggregatesFilter<"City"> | number
   }
 
   export type PersonWhereInput = {
     AND?: PersonWhereInput | PersonWhereInput[]
     OR?: PersonWhereInput[]
     NOT?: PersonWhereInput | PersonWhereInput[]
-    id?: BigIntFilter<"Person"> | bigint | number
+    id?: IntFilter<"Person"> | number
     name?: StringFilter<"Person"> | string
     birth_date?: DateTimeFilter<"Person"> | Date | string
     gender?: IntFilter<"Person"> | number
     address?: StringFilter<"Person"> | string
-    city_id?: BigIntFilter<"Person"> | bigint | number
-    phone?: BigIntFilter<"Person"> | bigint | number
+    city_id?: IntFilter<"Person"> | number
+    phone?: IntFilter<"Person"> | number
     last_active_at?: DateTimeFilter<"Person"> | Date | string
-    shelter_id?: BigIntNullableFilter<"Person"> | bigint | number | null
+    shelter_id?: IntNullableFilter<"Person"> | number | null
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
     pet?: PetListRelationFilter
     shelter?: XOR<ShelterNullableScalarRelationFilter, ShelterWhereInput> | null
@@ -8567,7 +8655,7 @@ export namespace Prisma {
   }
 
   export type PersonWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
+    id?: number
     AND?: PersonWhereInput | PersonWhereInput[]
     OR?: PersonWhereInput[]
     NOT?: PersonWhereInput | PersonWhereInput[]
@@ -8575,10 +8663,10 @@ export namespace Prisma {
     birth_date?: DateTimeFilter<"Person"> | Date | string
     gender?: IntFilter<"Person"> | number
     address?: StringFilter<"Person"> | string
-    city_id?: BigIntFilter<"Person"> | bigint | number
-    phone?: BigIntFilter<"Person"> | bigint | number
+    city_id?: IntFilter<"Person"> | number
+    phone?: IntFilter<"Person"> | number
     last_active_at?: DateTimeFilter<"Person"> | Date | string
-    shelter_id?: BigIntNullableFilter<"Person"> | bigint | number | null
+    shelter_id?: IntNullableFilter<"Person"> | number | null
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
     pet?: PetListRelationFilter
     shelter?: XOR<ShelterNullableScalarRelationFilter, ShelterWhereInput> | null
@@ -8605,30 +8693,34 @@ export namespace Prisma {
     AND?: PersonScalarWhereWithAggregatesInput | PersonScalarWhereWithAggregatesInput[]
     OR?: PersonScalarWhereWithAggregatesInput[]
     NOT?: PersonScalarWhereWithAggregatesInput | PersonScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Person"> | bigint | number
+    id?: IntWithAggregatesFilter<"Person"> | number
     name?: StringWithAggregatesFilter<"Person"> | string
     birth_date?: DateTimeWithAggregatesFilter<"Person"> | Date | string
     gender?: IntWithAggregatesFilter<"Person"> | number
     address?: StringWithAggregatesFilter<"Person"> | string
-    city_id?: BigIntWithAggregatesFilter<"Person"> | bigint | number
-    phone?: BigIntWithAggregatesFilter<"Person"> | bigint | number
+    city_id?: IntWithAggregatesFilter<"Person"> | number
+    phone?: IntWithAggregatesFilter<"Person"> | number
     last_active_at?: DateTimeWithAggregatesFilter<"Person"> | Date | string
-    shelter_id?: BigIntNullableWithAggregatesFilter<"Person"> | bigint | number | null
+    shelter_id?: IntNullableWithAggregatesFilter<"Person"> | number | null
   }
 
   export type PetWhereInput = {
     AND?: PetWhereInput | PetWhereInput[]
     OR?: PetWhereInput[]
     NOT?: PetWhereInput | PetWhereInput[]
-    id?: BigIntFilter<"Pet"> | bigint | number
+    id?: IntFilter<"Pet"> | number
     name?: StringFilter<"Pet"> | string
     birth_date?: DateTimeFilter<"Pet"> | Date | string
     gender?: IntFilter<"Pet"> | number
-    person_id?: BigIntFilter<"Pet"> | bigint | number
+    species?: StringFilter<"Pet"> | string
+    weight?: IntFilter<"Pet"> | number
+    hair_type?: StringFilter<"Pet"> | string
+    hair_color?: StringFilter<"Pet"> | string
+    owner_id?: IntFilter<"Pet"> | number
     description?: StringFilter<"Pet"> | string
     has_spotlight?: BoolFilter<"Pet"> | boolean
     is_on_adoption?: BoolFilter<"Pet"> | boolean
-    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    owned_by?: XOR<PersonScalarRelationFilter, PersonWhereInput>
     traits?: TraitListRelationFilter
   }
 
@@ -8637,27 +8729,35 @@ export namespace Prisma {
     name?: SortOrder
     birth_date?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    species?: SortOrder
+    weight?: SortOrder
+    hair_type?: SortOrder
+    hair_color?: SortOrder
+    owner_id?: SortOrder
     description?: SortOrder
     has_spotlight?: SortOrder
     is_on_adoption?: SortOrder
-    person?: PersonOrderByWithRelationInput
+    owned_by?: PersonOrderByWithRelationInput
     traits?: TraitOrderByRelationAggregateInput
   }
 
   export type PetWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
+    id?: number
     AND?: PetWhereInput | PetWhereInput[]
     OR?: PetWhereInput[]
     NOT?: PetWhereInput | PetWhereInput[]
     name?: StringFilter<"Pet"> | string
     birth_date?: DateTimeFilter<"Pet"> | Date | string
     gender?: IntFilter<"Pet"> | number
-    person_id?: BigIntFilter<"Pet"> | bigint | number
+    species?: StringFilter<"Pet"> | string
+    weight?: IntFilter<"Pet"> | number
+    hair_type?: StringFilter<"Pet"> | string
+    hair_color?: StringFilter<"Pet"> | string
+    owner_id?: IntFilter<"Pet"> | number
     description?: StringFilter<"Pet"> | string
     has_spotlight?: BoolFilter<"Pet"> | boolean
     is_on_adoption?: BoolFilter<"Pet"> | boolean
-    person?: XOR<PersonScalarRelationFilter, PersonWhereInput>
+    owned_by?: XOR<PersonScalarRelationFilter, PersonWhereInput>
     traits?: TraitListRelationFilter
   }, "id">
 
@@ -8666,7 +8766,11 @@ export namespace Prisma {
     name?: SortOrder
     birth_date?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    species?: SortOrder
+    weight?: SortOrder
+    hair_type?: SortOrder
+    hair_color?: SortOrder
+    owner_id?: SortOrder
     description?: SortOrder
     has_spotlight?: SortOrder
     is_on_adoption?: SortOrder
@@ -8681,66 +8785,28 @@ export namespace Prisma {
     AND?: PetScalarWhereWithAggregatesInput | PetScalarWhereWithAggregatesInput[]
     OR?: PetScalarWhereWithAggregatesInput[]
     NOT?: PetScalarWhereWithAggregatesInput | PetScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Pet"> | bigint | number
+    id?: IntWithAggregatesFilter<"Pet"> | number
     name?: StringWithAggregatesFilter<"Pet"> | string
     birth_date?: DateTimeWithAggregatesFilter<"Pet"> | Date | string
     gender?: IntWithAggregatesFilter<"Pet"> | number
-    person_id?: BigIntWithAggregatesFilter<"Pet"> | bigint | number
+    species?: StringWithAggregatesFilter<"Pet"> | string
+    weight?: IntWithAggregatesFilter<"Pet"> | number
+    hair_type?: StringWithAggregatesFilter<"Pet"> | string
+    hair_color?: StringWithAggregatesFilter<"Pet"> | string
+    owner_id?: IntWithAggregatesFilter<"Pet"> | number
     description?: StringWithAggregatesFilter<"Pet"> | string
     has_spotlight?: BoolWithAggregatesFilter<"Pet"> | boolean
     is_on_adoption?: BoolWithAggregatesFilter<"Pet"> | boolean
-  }
-
-  export type ProvinceWhereInput = {
-    AND?: ProvinceWhereInput | ProvinceWhereInput[]
-    OR?: ProvinceWhereInput[]
-    NOT?: ProvinceWhereInput | ProvinceWhereInput[]
-    id?: BigIntFilter<"Province"> | bigint | number
-    province?: StringFilter<"Province"> | string
-    city?: CityListRelationFilter
-  }
-
-  export type ProvinceOrderByWithRelationInput = {
-    id?: SortOrder
-    province?: SortOrder
-    city?: CityOrderByRelationAggregateInput
-  }
-
-  export type ProvinceWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
-    AND?: ProvinceWhereInput | ProvinceWhereInput[]
-    OR?: ProvinceWhereInput[]
-    NOT?: ProvinceWhereInput | ProvinceWhereInput[]
-    province?: StringFilter<"Province"> | string
-    city?: CityListRelationFilter
-  }, "id">
-
-  export type ProvinceOrderByWithAggregationInput = {
-    id?: SortOrder
-    province?: SortOrder
-    _count?: ProvinceCountOrderByAggregateInput
-    _avg?: ProvinceAvgOrderByAggregateInput
-    _max?: ProvinceMaxOrderByAggregateInput
-    _min?: ProvinceMinOrderByAggregateInput
-    _sum?: ProvinceSumOrderByAggregateInput
-  }
-
-  export type ProvinceScalarWhereWithAggregatesInput = {
-    AND?: ProvinceScalarWhereWithAggregatesInput | ProvinceScalarWhereWithAggregatesInput[]
-    OR?: ProvinceScalarWhereWithAggregatesInput[]
-    NOT?: ProvinceScalarWhereWithAggregatesInput | ProvinceScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Province"> | bigint | number
-    province?: StringWithAggregatesFilter<"Province"> | string
   }
 
   export type ShelterWhereInput = {
     AND?: ShelterWhereInput | ShelterWhereInput[]
     OR?: ShelterWhereInput[]
     NOT?: ShelterWhereInput | ShelterWhereInput[]
-    id?: BigIntFilter<"Shelter"> | bigint | number
+    id?: IntFilter<"Shelter"> | number
     name?: StringFilter<"Shelter"> | string
     address?: StringFilter<"Shelter"> | string
-    city_id?: BigIntFilter<"Shelter"> | bigint | number
+    city_id?: IntFilter<"Shelter"> | number
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
     persons?: PersonListRelationFilter
   }
@@ -8755,13 +8821,13 @@ export namespace Prisma {
   }
 
   export type ShelterWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
+    id?: number
     AND?: ShelterWhereInput | ShelterWhereInput[]
     OR?: ShelterWhereInput[]
     NOT?: ShelterWhereInput | ShelterWhereInput[]
     name?: StringFilter<"Shelter"> | string
     address?: StringFilter<"Shelter"> | string
-    city_id?: BigIntFilter<"Shelter"> | bigint | number
+    city_id?: IntFilter<"Shelter"> | number
     city?: XOR<CityScalarRelationFilter, CityWhereInput>
     persons?: PersonListRelationFilter
   }, "id">
@@ -8782,17 +8848,17 @@ export namespace Prisma {
     AND?: ShelterScalarWhereWithAggregatesInput | ShelterScalarWhereWithAggregatesInput[]
     OR?: ShelterScalarWhereWithAggregatesInput[]
     NOT?: ShelterScalarWhereWithAggregatesInput | ShelterScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Shelter"> | bigint | number
+    id?: IntWithAggregatesFilter<"Shelter"> | number
     name?: StringWithAggregatesFilter<"Shelter"> | string
     address?: StringWithAggregatesFilter<"Shelter"> | string
-    city_id?: BigIntWithAggregatesFilter<"Shelter"> | bigint | number
+    city_id?: IntWithAggregatesFilter<"Shelter"> | number
   }
 
   export type TraitWhereInput = {
     AND?: TraitWhereInput | TraitWhereInput[]
     OR?: TraitWhereInput[]
     NOT?: TraitWhereInput | TraitWhereInput[]
-    id?: BigIntFilter<"Trait"> | bigint | number
+    id?: IntFilter<"Trait"> | number
     name?: StringFilter<"Trait"> | string
     code?: IntFilter<"Trait"> | number
     pets?: PetListRelationFilter
@@ -8806,7 +8872,7 @@ export namespace Prisma {
   }
 
   export type TraitWhereUniqueInput = Prisma.AtLeast<{
-    id?: bigint | number
+    id?: number
     AND?: TraitWhereInput | TraitWhereInput[]
     OR?: TraitWhereInput[]
     NOT?: TraitWhereInput | TraitWhereInput[]
@@ -8830,13 +8896,48 @@ export namespace Prisma {
     AND?: TraitScalarWhereWithAggregatesInput | TraitScalarWhereWithAggregatesInput[]
     OR?: TraitScalarWhereWithAggregatesInput[]
     NOT?: TraitScalarWhereWithAggregatesInput | TraitScalarWhereWithAggregatesInput[]
-    id?: BigIntWithAggregatesFilter<"Trait"> | bigint | number
+    id?: IntWithAggregatesFilter<"Trait"> | number
     name?: StringWithAggregatesFilter<"Trait"> | string
     code?: IntWithAggregatesFilter<"Trait"> | number
   }
 
+  export type ProvinceCreateInput = {
+    province: string
+    city?: CityCreateNestedManyWithoutProvinceInput
+  }
+
+  export type ProvinceUncheckedCreateInput = {
+    id?: number
+    province: string
+    city?: CityUncheckedCreateNestedManyWithoutProvinceInput
+  }
+
+  export type ProvinceUpdateInput = {
+    province?: StringFieldUpdateOperationsInput | string
+    city?: CityUpdateManyWithoutProvinceNestedInput
+  }
+
+  export type ProvinceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    province?: StringFieldUpdateOperationsInput | string
+    city?: CityUncheckedUpdateManyWithoutProvinceNestedInput
+  }
+
+  export type ProvinceCreateManyInput = {
+    id?: number
+    province: string
+  }
+
+  export type ProvinceUpdateManyMutationInput = {
+    province?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProvinceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    province?: StringFieldUpdateOperationsInput | string
+  }
+
   export type CityCreateInput = {
-    id?: bigint | number
     name: string
     province: ProvinceCreateNestedOneWithoutCityInput
     person?: PersonCreateNestedManyWithoutCityInput
@@ -8844,15 +8945,14 @@ export namespace Prisma {
   }
 
   export type CityUncheckedCreateInput = {
-    id?: bigint | number
+    id?: number
     name: string
-    province_id: bigint | number
+    province_id: number
     person?: PersonUncheckedCreateNestedManyWithoutCityInput
     shelter?: ShelterUncheckedCreateNestedManyWithoutCityInput
   }
 
   export type CityUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     province?: ProvinceUpdateOneRequiredWithoutCityNestedInput
     person?: PersonUpdateManyWithoutCityNestedInput
@@ -8860,134 +8960,137 @@ export namespace Prisma {
   }
 
   export type CityUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    province_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    province_id?: IntFieldUpdateOperationsInput | number
     person?: PersonUncheckedUpdateManyWithoutCityNestedInput
     shelter?: ShelterUncheckedUpdateManyWithoutCityNestedInput
   }
 
   export type CityCreateManyInput = {
-    id?: bigint | number
+    id?: number
     name: string
-    province_id: bigint | number
+    province_id: number
   }
 
   export type CityUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
   }
 
   export type CityUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    province_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    province_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type PersonCreateInput = {
-    id?: bigint | number
     name: string
     birth_date: Date | string
     gender: number
     address: string
-    phone: bigint | number
+    phone: number
     last_active_at?: Date | string
     city: CityCreateNestedOneWithoutPersonInput
-    pet?: PetCreateNestedManyWithoutPersonInput
+    pet?: PetCreateNestedManyWithoutOwned_byInput
     shelter?: ShelterCreateNestedOneWithoutPersonsInput
   }
 
   export type PersonUncheckedCreateInput = {
-    id?: bigint | number
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
     address: string
-    city_id: bigint | number
-    phone: bigint | number
+    city_id: number
+    phone: number
     last_active_at?: Date | string
-    shelter_id?: bigint | number | null
-    pet?: PetUncheckedCreateNestedManyWithoutPersonInput
+    shelter_id?: number | null
+    pet?: PetUncheckedCreateNestedManyWithoutOwned_byInput
   }
 
   export type PersonUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
     city?: CityUpdateOneRequiredWithoutPersonNestedInput
-    pet?: PetUpdateManyWithoutPersonNestedInput
+    pet?: PetUpdateManyWithoutOwned_byNestedInput
     shelter?: ShelterUpdateOneWithoutPersonsNestedInput
   }
 
   export type PersonUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    city_id?: IntFieldUpdateOperationsInput | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    shelter_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    pet?: PetUncheckedUpdateManyWithoutPersonNestedInput
+    shelter_id?: NullableIntFieldUpdateOperationsInput | number | null
+    pet?: PetUncheckedUpdateManyWithoutOwned_byNestedInput
   }
 
   export type PersonCreateManyInput = {
-    id?: bigint | number
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
     address: string
-    city_id: bigint | number
-    phone: bigint | number
+    city_id: number
+    phone: number
     last_active_at?: Date | string
-    shelter_id?: bigint | number | null
+    shelter_id?: number | null
   }
 
   export type PersonUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PersonUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    city_id?: IntFieldUpdateOperationsInput | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    shelter_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+    shelter_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PetCreateInput = {
-    id?: bigint | number
     name: string
     birth_date: Date | string
     gender: number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
     description: string
     has_spotlight: boolean
     is_on_adoption?: boolean
-    person: PersonCreateNestedOneWithoutPetInput
+    owned_by: PersonCreateNestedOneWithoutPetInput
     traits?: TraitCreateNestedManyWithoutPetsInput
   }
 
   export type PetUncheckedCreateInput = {
-    id?: bigint | number
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
-    person_id: bigint | number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    owner_id: number
     description: string
     has_spotlight: boolean
     is_on_adoption?: boolean
@@ -8995,23 +9098,30 @@ export namespace Prisma {
   }
 
   export type PetUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
-    person?: PersonUpdateOneRequiredWithoutPetNestedInput
+    owned_by?: PersonUpdateOneRequiredWithoutPetNestedInput
     traits?: TraitUpdateManyWithoutPetsNestedInput
   }
 
   export type PetUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
-    person_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    owner_id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
@@ -9019,78 +9129,49 @@ export namespace Prisma {
   }
 
   export type PetCreateManyInput = {
-    id?: bigint | number
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
-    person_id: bigint | number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    owner_id: number
     description: string
     has_spotlight: boolean
     is_on_adoption?: boolean
   }
 
   export type PetUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PetUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
-    person_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    owner_id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
   }
 
-  export type ProvinceCreateInput = {
-    id?: bigint | number
-    province: string
-    city?: CityCreateNestedManyWithoutProvinceInput
-  }
-
-  export type ProvinceUncheckedCreateInput = {
-    id?: bigint | number
-    province: string
-    city?: CityUncheckedCreateNestedManyWithoutProvinceInput
-  }
-
-  export type ProvinceUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    province?: StringFieldUpdateOperationsInput | string
-    city?: CityUpdateManyWithoutProvinceNestedInput
-  }
-
-  export type ProvinceUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    province?: StringFieldUpdateOperationsInput | string
-    city?: CityUncheckedUpdateManyWithoutProvinceNestedInput
-  }
-
-  export type ProvinceCreateManyInput = {
-    id?: bigint | number
-    province: string
-  }
-
-  export type ProvinceUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    province?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ProvinceUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    province?: StringFieldUpdateOperationsInput | string
-  }
-
   export type ShelterCreateInput = {
-    id?: bigint | number
     name: string
     address: string
     city: CityCreateNestedOneWithoutShelterInput
@@ -9098,15 +9179,14 @@ export namespace Prisma {
   }
 
   export type ShelterUncheckedCreateInput = {
-    id?: bigint | number
+    id?: number
     name: string
     address: string
-    city_id: bigint | number
+    city_id: number
     persons?: PersonUncheckedCreateNestedManyWithoutShelterInput
   }
 
   export type ShelterUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     city?: CityUpdateOneRequiredWithoutShelterNestedInput
@@ -9114,88 +9194,84 @@ export namespace Prisma {
   }
 
   export type ShelterUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    city_id?: IntFieldUpdateOperationsInput | number
     persons?: PersonUncheckedUpdateManyWithoutShelterNestedInput
   }
 
   export type ShelterCreateManyInput = {
-    id?: bigint | number
+    id?: number
     name: string
     address: string
-    city_id: bigint | number
+    city_id: number
   }
 
   export type ShelterUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
   }
 
   export type ShelterUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    city_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type TraitCreateInput = {
-    id?: bigint | number
     name: string
     code: number
     pets?: PetCreateNestedManyWithoutTraitsInput
   }
 
   export type TraitUncheckedCreateInput = {
-    id?: bigint | number
+    id?: number
     name: string
     code: number
     pets?: PetUncheckedCreateNestedManyWithoutTraitsInput
   }
 
   export type TraitUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     code?: IntFieldUpdateOperationsInput | number
     pets?: PetUpdateManyWithoutTraitsNestedInput
   }
 
   export type TraitUncheckedUpdateInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     code?: IntFieldUpdateOperationsInput | number
     pets?: PetUncheckedUpdateManyWithoutTraitsNestedInput
   }
 
   export type TraitCreateManyInput = {
-    id?: bigint | number
+    id?: number
     name: string
     code: number
   }
 
   export type TraitUpdateManyMutationInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     code?: IntFieldUpdateOperationsInput | number
   }
 
   export type TraitUncheckedUpdateManyInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     code?: IntFieldUpdateOperationsInput | number
   }
 
-  export type BigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -9211,6 +9287,73 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type CityListRelationFilter = {
+    every?: CityWhereInput
+    some?: CityWhereInput
+    none?: CityWhereInput
+  }
+
+  export type CityOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProvinceCountOrderByAggregateInput = {
+    id?: SortOrder
+    province?: SortOrder
+  }
+
+  export type ProvinceAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ProvinceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    province?: SortOrder
+  }
+
+  export type ProvinceMinOrderByAggregateInput = {
+    id?: SortOrder
+    province?: SortOrder
+  }
+
+  export type ProvinceSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type ProvinceScalarRelationFilter = {
@@ -9266,40 +9409,6 @@ export namespace Prisma {
     province_id?: SortOrder
   }
 
-  export type BigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -9311,26 +9420,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type BigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type CityScalarRelationFilter = {
@@ -9424,36 +9522,20 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type BigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -9481,7 +9563,11 @@ export namespace Prisma {
     name?: SortOrder
     birth_date?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    species?: SortOrder
+    weight?: SortOrder
+    hair_type?: SortOrder
+    hair_color?: SortOrder
+    owner_id?: SortOrder
     description?: SortOrder
     has_spotlight?: SortOrder
     is_on_adoption?: SortOrder
@@ -9490,7 +9576,8 @@ export namespace Prisma {
   export type PetAvgOrderByAggregateInput = {
     id?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    weight?: SortOrder
+    owner_id?: SortOrder
   }
 
   export type PetMaxOrderByAggregateInput = {
@@ -9498,7 +9585,11 @@ export namespace Prisma {
     name?: SortOrder
     birth_date?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    species?: SortOrder
+    weight?: SortOrder
+    hair_type?: SortOrder
+    hair_color?: SortOrder
+    owner_id?: SortOrder
     description?: SortOrder
     has_spotlight?: SortOrder
     is_on_adoption?: SortOrder
@@ -9509,7 +9600,11 @@ export namespace Prisma {
     name?: SortOrder
     birth_date?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    species?: SortOrder
+    weight?: SortOrder
+    hair_type?: SortOrder
+    hair_color?: SortOrder
+    owner_id?: SortOrder
     description?: SortOrder
     has_spotlight?: SortOrder
     is_on_adoption?: SortOrder
@@ -9518,7 +9613,8 @@ export namespace Prisma {
   export type PetSumOrderByAggregateInput = {
     id?: SortOrder
     gender?: SortOrder
-    person_id?: SortOrder
+    weight?: SortOrder
+    owner_id?: SortOrder
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -9527,39 +9623,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type CityListRelationFilter = {
-    every?: CityWhereInput
-    some?: CityWhereInput
-    none?: CityWhereInput
-  }
-
-  export type CityOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type ProvinceCountOrderByAggregateInput = {
-    id?: SortOrder
-    province?: SortOrder
-  }
-
-  export type ProvinceAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type ProvinceMaxOrderByAggregateInput = {
-    id?: SortOrder
-    province?: SortOrder
-  }
-
-  export type ProvinceMinOrderByAggregateInput = {
-    id?: SortOrder
-    province?: SortOrder
-  }
-
-  export type ProvinceSumOrderByAggregateInput = {
-    id?: SortOrder
   }
 
   export type ShelterCountOrderByAggregateInput = {
@@ -9621,6 +9684,60 @@ export namespace Prisma {
     code?: SortOrder
   }
 
+  export type CityCreateNestedManyWithoutProvinceInput = {
+    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
+    createMany?: CityCreateManyProvinceInputEnvelope
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+  }
+
+  export type CityUncheckedCreateNestedManyWithoutProvinceInput = {
+    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
+    createMany?: CityCreateManyProvinceInputEnvelope
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+  }
+
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
+  export type CityUpdateManyWithoutProvinceNestedInput = {
+    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
+    upsert?: CityUpsertWithWhereUniqueWithoutProvinceInput | CityUpsertWithWhereUniqueWithoutProvinceInput[]
+    createMany?: CityCreateManyProvinceInputEnvelope
+    set?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    disconnect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    delete?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    update?: CityUpdateWithWhereUniqueWithoutProvinceInput | CityUpdateWithWhereUniqueWithoutProvinceInput[]
+    updateMany?: CityUpdateManyWithWhereWithoutProvinceInput | CityUpdateManyWithWhereWithoutProvinceInput[]
+    deleteMany?: CityScalarWhereInput | CityScalarWhereInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type CityUncheckedUpdateManyWithoutProvinceNestedInput = {
+    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
+    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
+    upsert?: CityUpsertWithWhereUniqueWithoutProvinceInput | CityUpsertWithWhereUniqueWithoutProvinceInput[]
+    createMany?: CityCreateManyProvinceInputEnvelope
+    set?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    disconnect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    delete?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
+    update?: CityUpdateWithWhereUniqueWithoutProvinceInput | CityUpdateWithWhereUniqueWithoutProvinceInput[]
+    updateMany?: CityUpdateManyWithWhereWithoutProvinceInput | CityUpdateManyWithWhereWithoutProvinceInput[]
+    deleteMany?: CityScalarWhereInput | CityScalarWhereInput[]
+  }
+
   export type ProvinceCreateNestedOneWithoutCityInput = {
     create?: XOR<ProvinceCreateWithoutCityInput, ProvinceUncheckedCreateWithoutCityInput>
     connectOrCreate?: ProvinceCreateOrConnectWithoutCityInput
@@ -9653,18 +9770,6 @@ export namespace Prisma {
     connectOrCreate?: ShelterCreateOrConnectWithoutCityInput | ShelterCreateOrConnectWithoutCityInput[]
     createMany?: ShelterCreateManyCityInputEnvelope
     connect?: ShelterWhereUniqueInput | ShelterWhereUniqueInput[]
-  }
-
-  export type BigIntFieldUpdateOperationsInput = {
-    set?: bigint | number
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
-  }
-
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
   }
 
   export type ProvinceUpdateOneRequiredWithoutCityNestedInput = {
@@ -9737,10 +9842,10 @@ export namespace Prisma {
     connect?: CityWhereUniqueInput
   }
 
-  export type PetCreateNestedManyWithoutPersonInput = {
-    create?: XOR<PetCreateWithoutPersonInput, PetUncheckedCreateWithoutPersonInput> | PetCreateWithoutPersonInput[] | PetUncheckedCreateWithoutPersonInput[]
-    connectOrCreate?: PetCreateOrConnectWithoutPersonInput | PetCreateOrConnectWithoutPersonInput[]
-    createMany?: PetCreateManyPersonInputEnvelope
+  export type PetCreateNestedManyWithoutOwned_byInput = {
+    create?: XOR<PetCreateWithoutOwned_byInput, PetUncheckedCreateWithoutOwned_byInput> | PetCreateWithoutOwned_byInput[] | PetUncheckedCreateWithoutOwned_byInput[]
+    connectOrCreate?: PetCreateOrConnectWithoutOwned_byInput | PetCreateOrConnectWithoutOwned_byInput[]
+    createMany?: PetCreateManyOwned_byInputEnvelope
     connect?: PetWhereUniqueInput | PetWhereUniqueInput[]
   }
 
@@ -9750,23 +9855,15 @@ export namespace Prisma {
     connect?: ShelterWhereUniqueInput
   }
 
-  export type PetUncheckedCreateNestedManyWithoutPersonInput = {
-    create?: XOR<PetCreateWithoutPersonInput, PetUncheckedCreateWithoutPersonInput> | PetCreateWithoutPersonInput[] | PetUncheckedCreateWithoutPersonInput[]
-    connectOrCreate?: PetCreateOrConnectWithoutPersonInput | PetCreateOrConnectWithoutPersonInput[]
-    createMany?: PetCreateManyPersonInputEnvelope
+  export type PetUncheckedCreateNestedManyWithoutOwned_byInput = {
+    create?: XOR<PetCreateWithoutOwned_byInput, PetUncheckedCreateWithoutOwned_byInput> | PetCreateWithoutOwned_byInput[] | PetUncheckedCreateWithoutOwned_byInput[]
+    connectOrCreate?: PetCreateOrConnectWithoutOwned_byInput | PetCreateOrConnectWithoutOwned_byInput[]
+    createMany?: PetCreateManyOwned_byInputEnvelope
     connect?: PetWhereUniqueInput | PetWhereUniqueInput[]
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type CityUpdateOneRequiredWithoutPersonNestedInput = {
@@ -9777,17 +9874,17 @@ export namespace Prisma {
     update?: XOR<XOR<CityUpdateToOneWithWhereWithoutPersonInput, CityUpdateWithoutPersonInput>, CityUncheckedUpdateWithoutPersonInput>
   }
 
-  export type PetUpdateManyWithoutPersonNestedInput = {
-    create?: XOR<PetCreateWithoutPersonInput, PetUncheckedCreateWithoutPersonInput> | PetCreateWithoutPersonInput[] | PetUncheckedCreateWithoutPersonInput[]
-    connectOrCreate?: PetCreateOrConnectWithoutPersonInput | PetCreateOrConnectWithoutPersonInput[]
-    upsert?: PetUpsertWithWhereUniqueWithoutPersonInput | PetUpsertWithWhereUniqueWithoutPersonInput[]
-    createMany?: PetCreateManyPersonInputEnvelope
+  export type PetUpdateManyWithoutOwned_byNestedInput = {
+    create?: XOR<PetCreateWithoutOwned_byInput, PetUncheckedCreateWithoutOwned_byInput> | PetCreateWithoutOwned_byInput[] | PetUncheckedCreateWithoutOwned_byInput[]
+    connectOrCreate?: PetCreateOrConnectWithoutOwned_byInput | PetCreateOrConnectWithoutOwned_byInput[]
+    upsert?: PetUpsertWithWhereUniqueWithoutOwned_byInput | PetUpsertWithWhereUniqueWithoutOwned_byInput[]
+    createMany?: PetCreateManyOwned_byInputEnvelope
     set?: PetWhereUniqueInput | PetWhereUniqueInput[]
     disconnect?: PetWhereUniqueInput | PetWhereUniqueInput[]
     delete?: PetWhereUniqueInput | PetWhereUniqueInput[]
     connect?: PetWhereUniqueInput | PetWhereUniqueInput[]
-    update?: PetUpdateWithWhereUniqueWithoutPersonInput | PetUpdateWithWhereUniqueWithoutPersonInput[]
-    updateMany?: PetUpdateManyWithWhereWithoutPersonInput | PetUpdateManyWithWhereWithoutPersonInput[]
+    update?: PetUpdateWithWhereUniqueWithoutOwned_byInput | PetUpdateWithWhereUniqueWithoutOwned_byInput[]
+    updateMany?: PetUpdateManyWithWhereWithoutOwned_byInput | PetUpdateManyWithWhereWithoutOwned_byInput[]
     deleteMany?: PetScalarWhereInput | PetScalarWhereInput[]
   }
 
@@ -9801,25 +9898,25 @@ export namespace Prisma {
     update?: XOR<XOR<ShelterUpdateToOneWithWhereWithoutPersonsInput, ShelterUpdateWithoutPersonsInput>, ShelterUncheckedUpdateWithoutPersonsInput>
   }
 
-  export type NullableBigIntFieldUpdateOperationsInput = {
-    set?: bigint | number | null
-    increment?: bigint | number
-    decrement?: bigint | number
-    multiply?: bigint | number
-    divide?: bigint | number
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
-  export type PetUncheckedUpdateManyWithoutPersonNestedInput = {
-    create?: XOR<PetCreateWithoutPersonInput, PetUncheckedCreateWithoutPersonInput> | PetCreateWithoutPersonInput[] | PetUncheckedCreateWithoutPersonInput[]
-    connectOrCreate?: PetCreateOrConnectWithoutPersonInput | PetCreateOrConnectWithoutPersonInput[]
-    upsert?: PetUpsertWithWhereUniqueWithoutPersonInput | PetUpsertWithWhereUniqueWithoutPersonInput[]
-    createMany?: PetCreateManyPersonInputEnvelope
+  export type PetUncheckedUpdateManyWithoutOwned_byNestedInput = {
+    create?: XOR<PetCreateWithoutOwned_byInput, PetUncheckedCreateWithoutOwned_byInput> | PetCreateWithoutOwned_byInput[] | PetUncheckedCreateWithoutOwned_byInput[]
+    connectOrCreate?: PetCreateOrConnectWithoutOwned_byInput | PetCreateOrConnectWithoutOwned_byInput[]
+    upsert?: PetUpsertWithWhereUniqueWithoutOwned_byInput | PetUpsertWithWhereUniqueWithoutOwned_byInput[]
+    createMany?: PetCreateManyOwned_byInputEnvelope
     set?: PetWhereUniqueInput | PetWhereUniqueInput[]
     disconnect?: PetWhereUniqueInput | PetWhereUniqueInput[]
     delete?: PetWhereUniqueInput | PetWhereUniqueInput[]
     connect?: PetWhereUniqueInput | PetWhereUniqueInput[]
-    update?: PetUpdateWithWhereUniqueWithoutPersonInput | PetUpdateWithWhereUniqueWithoutPersonInput[]
-    updateMany?: PetUpdateManyWithWhereWithoutPersonInput | PetUpdateManyWithWhereWithoutPersonInput[]
+    update?: PetUpdateWithWhereUniqueWithoutOwned_byInput | PetUpdateWithWhereUniqueWithoutOwned_byInput[]
+    updateMany?: PetUpdateManyWithWhereWithoutOwned_byInput | PetUpdateManyWithWhereWithoutOwned_byInput[]
     deleteMany?: PetScalarWhereInput | PetScalarWhereInput[]
   }
 
@@ -9877,48 +9974,6 @@ export namespace Prisma {
     update?: TraitUpdateWithWhereUniqueWithoutPetsInput | TraitUpdateWithWhereUniqueWithoutPetsInput[]
     updateMany?: TraitUpdateManyWithWhereWithoutPetsInput | TraitUpdateManyWithWhereWithoutPetsInput[]
     deleteMany?: TraitScalarWhereInput | TraitScalarWhereInput[]
-  }
-
-  export type CityCreateNestedManyWithoutProvinceInput = {
-    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
-    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
-    createMany?: CityCreateManyProvinceInputEnvelope
-    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
-  }
-
-  export type CityUncheckedCreateNestedManyWithoutProvinceInput = {
-    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
-    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
-    createMany?: CityCreateManyProvinceInputEnvelope
-    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
-  }
-
-  export type CityUpdateManyWithoutProvinceNestedInput = {
-    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
-    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
-    upsert?: CityUpsertWithWhereUniqueWithoutProvinceInput | CityUpsertWithWhereUniqueWithoutProvinceInput[]
-    createMany?: CityCreateManyProvinceInputEnvelope
-    set?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    disconnect?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    delete?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    update?: CityUpdateWithWhereUniqueWithoutProvinceInput | CityUpdateWithWhereUniqueWithoutProvinceInput[]
-    updateMany?: CityUpdateManyWithWhereWithoutProvinceInput | CityUpdateManyWithWhereWithoutProvinceInput[]
-    deleteMany?: CityScalarWhereInput | CityScalarWhereInput[]
-  }
-
-  export type CityUncheckedUpdateManyWithoutProvinceNestedInput = {
-    create?: XOR<CityCreateWithoutProvinceInput, CityUncheckedCreateWithoutProvinceInput> | CityCreateWithoutProvinceInput[] | CityUncheckedCreateWithoutProvinceInput[]
-    connectOrCreate?: CityCreateOrConnectWithoutProvinceInput | CityCreateOrConnectWithoutProvinceInput[]
-    upsert?: CityUpsertWithWhereUniqueWithoutProvinceInput | CityUpsertWithWhereUniqueWithoutProvinceInput[]
-    createMany?: CityCreateManyProvinceInputEnvelope
-    set?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    disconnect?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    delete?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    connect?: CityWhereUniqueInput | CityWhereUniqueInput[]
-    update?: CityUpdateWithWhereUniqueWithoutProvinceInput | CityUpdateWithWhereUniqueWithoutProvinceInput[]
-    updateMany?: CityUpdateManyWithWhereWithoutProvinceInput | CityUpdateManyWithWhereWithoutProvinceInput[]
-    deleteMany?: CityScalarWhereInput | CityScalarWhereInput[]
   }
 
   export type CityCreateNestedOneWithoutShelterInput = {
@@ -10015,15 +10070,15 @@ export namespace Prisma {
     deleteMany?: PetScalarWhereInput | PetScalarWhereInput[]
   }
 
-  export type NestedBigIntFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntFilter<$PrismaModel> | bigint | number
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -10040,23 +10095,7 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedBigIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel>
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntWithAggregatesFilter<$PrismaModel> | bigint | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedBigIntFilter<$PrismaModel>
-    _min?: NestedBigIntFilter<$PrismaModel>
-    _max?: NestedBigIntFilter<$PrismaModel>
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10064,7 +10103,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type NestedFloatFilter<$PrismaModel = never> = {
@@ -10106,15 +10150,15 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type NestedBigIntNullableFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableFilter<$PrismaModel> | bigint | number | null
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -10131,39 +10175,7 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedBigIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: bigint | number | BigIntFieldRefInput<$PrismaModel> | null
-    in?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    notIn?: bigint[] | number[] | ListBigIntFieldRefInput<$PrismaModel> | null
-    lt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    lte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gt?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    gte?: bigint | number | BigIntFieldRefInput<$PrismaModel>
-    not?: NestedBigIntNullableWithAggregatesFilter<$PrismaModel> | bigint | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedBigIntNullableFilter<$PrismaModel>
-    _min?: NestedBigIntNullableFilter<$PrismaModel>
-    _max?: NestedBigIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -10171,7 +10183,12 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
@@ -10198,422 +10215,14 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type ProvinceCreateWithoutCityInput = {
-    id?: bigint | number
-    province: string
-  }
-
-  export type ProvinceUncheckedCreateWithoutCityInput = {
-    id?: bigint | number
-    province: string
-  }
-
-  export type ProvinceCreateOrConnectWithoutCityInput = {
-    where: ProvinceWhereUniqueInput
-    create: XOR<ProvinceCreateWithoutCityInput, ProvinceUncheckedCreateWithoutCityInput>
-  }
-
-  export type PersonCreateWithoutCityInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    address: string
-    phone: bigint | number
-    last_active_at?: Date | string
-    pet?: PetCreateNestedManyWithoutPersonInput
-    shelter?: ShelterCreateNestedOneWithoutPersonsInput
-  }
-
-  export type PersonUncheckedCreateWithoutCityInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    address: string
-    phone: bigint | number
-    last_active_at?: Date | string
-    shelter_id?: bigint | number | null
-    pet?: PetUncheckedCreateNestedManyWithoutPersonInput
-  }
-
-  export type PersonCreateOrConnectWithoutCityInput = {
-    where: PersonWhereUniqueInput
-    create: XOR<PersonCreateWithoutCityInput, PersonUncheckedCreateWithoutCityInput>
-  }
-
-  export type PersonCreateManyCityInputEnvelope = {
-    data: PersonCreateManyCityInput | PersonCreateManyCityInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ShelterCreateWithoutCityInput = {
-    id?: bigint | number
-    name: string
-    address: string
-    persons?: PersonCreateNestedManyWithoutShelterInput
-  }
-
-  export type ShelterUncheckedCreateWithoutCityInput = {
-    id?: bigint | number
-    name: string
-    address: string
-    persons?: PersonUncheckedCreateNestedManyWithoutShelterInput
-  }
-
-  export type ShelterCreateOrConnectWithoutCityInput = {
-    where: ShelterWhereUniqueInput
-    create: XOR<ShelterCreateWithoutCityInput, ShelterUncheckedCreateWithoutCityInput>
-  }
-
-  export type ShelterCreateManyCityInputEnvelope = {
-    data: ShelterCreateManyCityInput | ShelterCreateManyCityInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ProvinceUpsertWithoutCityInput = {
-    update: XOR<ProvinceUpdateWithoutCityInput, ProvinceUncheckedUpdateWithoutCityInput>
-    create: XOR<ProvinceCreateWithoutCityInput, ProvinceUncheckedCreateWithoutCityInput>
-    where?: ProvinceWhereInput
-  }
-
-  export type ProvinceUpdateToOneWithWhereWithoutCityInput = {
-    where?: ProvinceWhereInput
-    data: XOR<ProvinceUpdateWithoutCityInput, ProvinceUncheckedUpdateWithoutCityInput>
-  }
-
-  export type ProvinceUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    province?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type ProvinceUncheckedUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    province?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PersonUpsertWithWhereUniqueWithoutCityInput = {
-    where: PersonWhereUniqueInput
-    update: XOR<PersonUpdateWithoutCityInput, PersonUncheckedUpdateWithoutCityInput>
-    create: XOR<PersonCreateWithoutCityInput, PersonUncheckedCreateWithoutCityInput>
-  }
-
-  export type PersonUpdateWithWhereUniqueWithoutCityInput = {
-    where: PersonWhereUniqueInput
-    data: XOR<PersonUpdateWithoutCityInput, PersonUncheckedUpdateWithoutCityInput>
-  }
-
-  export type PersonUpdateManyWithWhereWithoutCityInput = {
-    where: PersonScalarWhereInput
-    data: XOR<PersonUpdateManyMutationInput, PersonUncheckedUpdateManyWithoutCityInput>
-  }
-
-  export type PersonScalarWhereInput = {
-    AND?: PersonScalarWhereInput | PersonScalarWhereInput[]
-    OR?: PersonScalarWhereInput[]
-    NOT?: PersonScalarWhereInput | PersonScalarWhereInput[]
-    id?: BigIntFilter<"Person"> | bigint | number
-    name?: StringFilter<"Person"> | string
-    birth_date?: DateTimeFilter<"Person"> | Date | string
-    gender?: IntFilter<"Person"> | number
-    address?: StringFilter<"Person"> | string
-    city_id?: BigIntFilter<"Person"> | bigint | number
-    phone?: BigIntFilter<"Person"> | bigint | number
-    last_active_at?: DateTimeFilter<"Person"> | Date | string
-    shelter_id?: BigIntNullableFilter<"Person"> | bigint | number | null
-  }
-
-  export type ShelterUpsertWithWhereUniqueWithoutCityInput = {
-    where: ShelterWhereUniqueInput
-    update: XOR<ShelterUpdateWithoutCityInput, ShelterUncheckedUpdateWithoutCityInput>
-    create: XOR<ShelterCreateWithoutCityInput, ShelterUncheckedCreateWithoutCityInput>
-  }
-
-  export type ShelterUpdateWithWhereUniqueWithoutCityInput = {
-    where: ShelterWhereUniqueInput
-    data: XOR<ShelterUpdateWithoutCityInput, ShelterUncheckedUpdateWithoutCityInput>
-  }
-
-  export type ShelterUpdateManyWithWhereWithoutCityInput = {
-    where: ShelterScalarWhereInput
-    data: XOR<ShelterUpdateManyMutationInput, ShelterUncheckedUpdateManyWithoutCityInput>
-  }
-
-  export type ShelterScalarWhereInput = {
-    AND?: ShelterScalarWhereInput | ShelterScalarWhereInput[]
-    OR?: ShelterScalarWhereInput[]
-    NOT?: ShelterScalarWhereInput | ShelterScalarWhereInput[]
-    id?: BigIntFilter<"Shelter"> | bigint | number
-    name?: StringFilter<"Shelter"> | string
-    address?: StringFilter<"Shelter"> | string
-    city_id?: BigIntFilter<"Shelter"> | bigint | number
-  }
-
-  export type CityCreateWithoutPersonInput = {
-    id?: bigint | number
-    name: string
-    province: ProvinceCreateNestedOneWithoutCityInput
-    shelter?: ShelterCreateNestedManyWithoutCityInput
-  }
-
-  export type CityUncheckedCreateWithoutPersonInput = {
-    id?: bigint | number
-    name: string
-    province_id: bigint | number
-    shelter?: ShelterUncheckedCreateNestedManyWithoutCityInput
-  }
-
-  export type CityCreateOrConnectWithoutPersonInput = {
-    where: CityWhereUniqueInput
-    create: XOR<CityCreateWithoutPersonInput, CityUncheckedCreateWithoutPersonInput>
-  }
-
-  export type PetCreateWithoutPersonInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    description: string
-    has_spotlight: boolean
-    is_on_adoption?: boolean
-    traits?: TraitCreateNestedManyWithoutPetsInput
-  }
-
-  export type PetUncheckedCreateWithoutPersonInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    description: string
-    has_spotlight: boolean
-    is_on_adoption?: boolean
-    traits?: TraitUncheckedCreateNestedManyWithoutPetsInput
-  }
-
-  export type PetCreateOrConnectWithoutPersonInput = {
-    where: PetWhereUniqueInput
-    create: XOR<PetCreateWithoutPersonInput, PetUncheckedCreateWithoutPersonInput>
-  }
-
-  export type PetCreateManyPersonInputEnvelope = {
-    data: PetCreateManyPersonInput | PetCreateManyPersonInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type ShelterCreateWithoutPersonsInput = {
-    id?: bigint | number
-    name: string
-    address: string
-    city: CityCreateNestedOneWithoutShelterInput
-  }
-
-  export type ShelterUncheckedCreateWithoutPersonsInput = {
-    id?: bigint | number
-    name: string
-    address: string
-    city_id: bigint | number
-  }
-
-  export type ShelterCreateOrConnectWithoutPersonsInput = {
-    where: ShelterWhereUniqueInput
-    create: XOR<ShelterCreateWithoutPersonsInput, ShelterUncheckedCreateWithoutPersonsInput>
-  }
-
-  export type CityUpsertWithoutPersonInput = {
-    update: XOR<CityUpdateWithoutPersonInput, CityUncheckedUpdateWithoutPersonInput>
-    create: XOR<CityCreateWithoutPersonInput, CityUncheckedCreateWithoutPersonInput>
-    where?: CityWhereInput
-  }
-
-  export type CityUpdateToOneWithWhereWithoutPersonInput = {
-    where?: CityWhereInput
-    data: XOR<CityUpdateWithoutPersonInput, CityUncheckedUpdateWithoutPersonInput>
-  }
-
-  export type CityUpdateWithoutPersonInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    province?: ProvinceUpdateOneRequiredWithoutCityNestedInput
-    shelter?: ShelterUpdateManyWithoutCityNestedInput
-  }
-
-  export type CityUncheckedUpdateWithoutPersonInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    province_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    shelter?: ShelterUncheckedUpdateManyWithoutCityNestedInput
-  }
-
-  export type PetUpsertWithWhereUniqueWithoutPersonInput = {
-    where: PetWhereUniqueInput
-    update: XOR<PetUpdateWithoutPersonInput, PetUncheckedUpdateWithoutPersonInput>
-    create: XOR<PetCreateWithoutPersonInput, PetUncheckedCreateWithoutPersonInput>
-  }
-
-  export type PetUpdateWithWhereUniqueWithoutPersonInput = {
-    where: PetWhereUniqueInput
-    data: XOR<PetUpdateWithoutPersonInput, PetUncheckedUpdateWithoutPersonInput>
-  }
-
-  export type PetUpdateManyWithWhereWithoutPersonInput = {
-    where: PetScalarWhereInput
-    data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyWithoutPersonInput>
-  }
-
-  export type PetScalarWhereInput = {
-    AND?: PetScalarWhereInput | PetScalarWhereInput[]
-    OR?: PetScalarWhereInput[]
-    NOT?: PetScalarWhereInput | PetScalarWhereInput[]
-    id?: BigIntFilter<"Pet"> | bigint | number
-    name?: StringFilter<"Pet"> | string
-    birth_date?: DateTimeFilter<"Pet"> | Date | string
-    gender?: IntFilter<"Pet"> | number
-    person_id?: BigIntFilter<"Pet"> | bigint | number
-    description?: StringFilter<"Pet"> | string
-    has_spotlight?: BoolFilter<"Pet"> | boolean
-    is_on_adoption?: BoolFilter<"Pet"> | boolean
-  }
-
-  export type ShelterUpsertWithoutPersonsInput = {
-    update: XOR<ShelterUpdateWithoutPersonsInput, ShelterUncheckedUpdateWithoutPersonsInput>
-    create: XOR<ShelterCreateWithoutPersonsInput, ShelterUncheckedCreateWithoutPersonsInput>
-    where?: ShelterWhereInput
-  }
-
-  export type ShelterUpdateToOneWithWhereWithoutPersonsInput = {
-    where?: ShelterWhereInput
-    data: XOR<ShelterUpdateWithoutPersonsInput, ShelterUncheckedUpdateWithoutPersonsInput>
-  }
-
-  export type ShelterUpdateWithoutPersonsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city?: CityUpdateOneRequiredWithoutShelterNestedInput
-  }
-
-  export type ShelterUncheckedUpdateWithoutPersonsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
-  }
-
-  export type PersonCreateWithoutPetInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    address: string
-    phone: bigint | number
-    last_active_at?: Date | string
-    city: CityCreateNestedOneWithoutPersonInput
-    shelter?: ShelterCreateNestedOneWithoutPersonsInput
-  }
-
-  export type PersonUncheckedCreateWithoutPetInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    address: string
-    city_id: bigint | number
-    phone: bigint | number
-    last_active_at?: Date | string
-    shelter_id?: bigint | number | null
-  }
-
-  export type PersonCreateOrConnectWithoutPetInput = {
-    where: PersonWhereUniqueInput
-    create: XOR<PersonCreateWithoutPetInput, PersonUncheckedCreateWithoutPetInput>
-  }
-
-  export type TraitCreateWithoutPetsInput = {
-    id?: bigint | number
-    name: string
-    code: number
-  }
-
-  export type TraitUncheckedCreateWithoutPetsInput = {
-    id?: bigint | number
-    name: string
-    code: number
-  }
-
-  export type TraitCreateOrConnectWithoutPetsInput = {
-    where: TraitWhereUniqueInput
-    create: XOR<TraitCreateWithoutPetsInput, TraitUncheckedCreateWithoutPetsInput>
-  }
-
-  export type PersonUpsertWithoutPetInput = {
-    update: XOR<PersonUpdateWithoutPetInput, PersonUncheckedUpdateWithoutPetInput>
-    create: XOR<PersonCreateWithoutPetInput, PersonUncheckedCreateWithoutPetInput>
-    where?: PersonWhereInput
-  }
-
-  export type PersonUpdateToOneWithWhereWithoutPetInput = {
-    where?: PersonWhereInput
-    data: XOR<PersonUpdateWithoutPetInput, PersonUncheckedUpdateWithoutPetInput>
-  }
-
-  export type PersonUpdateWithoutPetInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
-    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    city?: CityUpdateOneRequiredWithoutPersonNestedInput
-    shelter?: ShelterUpdateOneWithoutPersonsNestedInput
-  }
-
-  export type PersonUncheckedUpdateWithoutPetInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
-    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    shelter_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  }
-
-  export type TraitUpsertWithWhereUniqueWithoutPetsInput = {
-    where: TraitWhereUniqueInput
-    update: XOR<TraitUpdateWithoutPetsInput, TraitUncheckedUpdateWithoutPetsInput>
-    create: XOR<TraitCreateWithoutPetsInput, TraitUncheckedCreateWithoutPetsInput>
-  }
-
-  export type TraitUpdateWithWhereUniqueWithoutPetsInput = {
-    where: TraitWhereUniqueInput
-    data: XOR<TraitUpdateWithoutPetsInput, TraitUncheckedUpdateWithoutPetsInput>
-  }
-
-  export type TraitUpdateManyWithWhereWithoutPetsInput = {
-    where: TraitScalarWhereInput
-    data: XOR<TraitUpdateManyMutationInput, TraitUncheckedUpdateManyWithoutPetsInput>
-  }
-
-  export type TraitScalarWhereInput = {
-    AND?: TraitScalarWhereInput | TraitScalarWhereInput[]
-    OR?: TraitScalarWhereInput[]
-    NOT?: TraitScalarWhereInput | TraitScalarWhereInput[]
-    id?: BigIntFilter<"Trait"> | bigint | number
-    name?: StringFilter<"Trait"> | string
-    code?: IntFilter<"Trait"> | number
-  }
-
   export type CityCreateWithoutProvinceInput = {
-    id?: bigint | number
     name: string
     person?: PersonCreateNestedManyWithoutCityInput
     shelter?: ShelterCreateNestedManyWithoutCityInput
   }
 
   export type CityUncheckedCreateWithoutProvinceInput = {
-    id?: bigint | number
+    id?: number
     name: string
     person?: PersonUncheckedCreateNestedManyWithoutCityInput
     shelter?: ShelterUncheckedCreateNestedManyWithoutCityInput
@@ -10649,22 +10258,428 @@ export namespace Prisma {
     AND?: CityScalarWhereInput | CityScalarWhereInput[]
     OR?: CityScalarWhereInput[]
     NOT?: CityScalarWhereInput | CityScalarWhereInput[]
-    id?: BigIntFilter<"City"> | bigint | number
+    id?: IntFilter<"City"> | number
     name?: StringFilter<"City"> | string
-    province_id?: BigIntFilter<"City"> | bigint | number
+    province_id?: IntFilter<"City"> | number
+  }
+
+  export type ProvinceCreateWithoutCityInput = {
+    province: string
+  }
+
+  export type ProvinceUncheckedCreateWithoutCityInput = {
+    id?: number
+    province: string
+  }
+
+  export type ProvinceCreateOrConnectWithoutCityInput = {
+    where: ProvinceWhereUniqueInput
+    create: XOR<ProvinceCreateWithoutCityInput, ProvinceUncheckedCreateWithoutCityInput>
+  }
+
+  export type PersonCreateWithoutCityInput = {
+    name: string
+    birth_date: Date | string
+    gender: number
+    address: string
+    phone: number
+    last_active_at?: Date | string
+    pet?: PetCreateNestedManyWithoutOwned_byInput
+    shelter?: ShelterCreateNestedOneWithoutPersonsInput
+  }
+
+  export type PersonUncheckedCreateWithoutCityInput = {
+    id?: number
+    name: string
+    birth_date: Date | string
+    gender: number
+    address: string
+    phone: number
+    last_active_at?: Date | string
+    shelter_id?: number | null
+    pet?: PetUncheckedCreateNestedManyWithoutOwned_byInput
+  }
+
+  export type PersonCreateOrConnectWithoutCityInput = {
+    where: PersonWhereUniqueInput
+    create: XOR<PersonCreateWithoutCityInput, PersonUncheckedCreateWithoutCityInput>
+  }
+
+  export type PersonCreateManyCityInputEnvelope = {
+    data: PersonCreateManyCityInput | PersonCreateManyCityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ShelterCreateWithoutCityInput = {
+    name: string
+    address: string
+    persons?: PersonCreateNestedManyWithoutShelterInput
+  }
+
+  export type ShelterUncheckedCreateWithoutCityInput = {
+    id?: number
+    name: string
+    address: string
+    persons?: PersonUncheckedCreateNestedManyWithoutShelterInput
+  }
+
+  export type ShelterCreateOrConnectWithoutCityInput = {
+    where: ShelterWhereUniqueInput
+    create: XOR<ShelterCreateWithoutCityInput, ShelterUncheckedCreateWithoutCityInput>
+  }
+
+  export type ShelterCreateManyCityInputEnvelope = {
+    data: ShelterCreateManyCityInput | ShelterCreateManyCityInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProvinceUpsertWithoutCityInput = {
+    update: XOR<ProvinceUpdateWithoutCityInput, ProvinceUncheckedUpdateWithoutCityInput>
+    create: XOR<ProvinceCreateWithoutCityInput, ProvinceUncheckedCreateWithoutCityInput>
+    where?: ProvinceWhereInput
+  }
+
+  export type ProvinceUpdateToOneWithWhereWithoutCityInput = {
+    where?: ProvinceWhereInput
+    data: XOR<ProvinceUpdateWithoutCityInput, ProvinceUncheckedUpdateWithoutCityInput>
+  }
+
+  export type ProvinceUpdateWithoutCityInput = {
+    province?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ProvinceUncheckedUpdateWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    province?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PersonUpsertWithWhereUniqueWithoutCityInput = {
+    where: PersonWhereUniqueInput
+    update: XOR<PersonUpdateWithoutCityInput, PersonUncheckedUpdateWithoutCityInput>
+    create: XOR<PersonCreateWithoutCityInput, PersonUncheckedCreateWithoutCityInput>
+  }
+
+  export type PersonUpdateWithWhereUniqueWithoutCityInput = {
+    where: PersonWhereUniqueInput
+    data: XOR<PersonUpdateWithoutCityInput, PersonUncheckedUpdateWithoutCityInput>
+  }
+
+  export type PersonUpdateManyWithWhereWithoutCityInput = {
+    where: PersonScalarWhereInput
+    data: XOR<PersonUpdateManyMutationInput, PersonUncheckedUpdateManyWithoutCityInput>
+  }
+
+  export type PersonScalarWhereInput = {
+    AND?: PersonScalarWhereInput | PersonScalarWhereInput[]
+    OR?: PersonScalarWhereInput[]
+    NOT?: PersonScalarWhereInput | PersonScalarWhereInput[]
+    id?: IntFilter<"Person"> | number
+    name?: StringFilter<"Person"> | string
+    birth_date?: DateTimeFilter<"Person"> | Date | string
+    gender?: IntFilter<"Person"> | number
+    address?: StringFilter<"Person"> | string
+    city_id?: IntFilter<"Person"> | number
+    phone?: IntFilter<"Person"> | number
+    last_active_at?: DateTimeFilter<"Person"> | Date | string
+    shelter_id?: IntNullableFilter<"Person"> | number | null
+  }
+
+  export type ShelterUpsertWithWhereUniqueWithoutCityInput = {
+    where: ShelterWhereUniqueInput
+    update: XOR<ShelterUpdateWithoutCityInput, ShelterUncheckedUpdateWithoutCityInput>
+    create: XOR<ShelterCreateWithoutCityInput, ShelterUncheckedCreateWithoutCityInput>
+  }
+
+  export type ShelterUpdateWithWhereUniqueWithoutCityInput = {
+    where: ShelterWhereUniqueInput
+    data: XOR<ShelterUpdateWithoutCityInput, ShelterUncheckedUpdateWithoutCityInput>
+  }
+
+  export type ShelterUpdateManyWithWhereWithoutCityInput = {
+    where: ShelterScalarWhereInput
+    data: XOR<ShelterUpdateManyMutationInput, ShelterUncheckedUpdateManyWithoutCityInput>
+  }
+
+  export type ShelterScalarWhereInput = {
+    AND?: ShelterScalarWhereInput | ShelterScalarWhereInput[]
+    OR?: ShelterScalarWhereInput[]
+    NOT?: ShelterScalarWhereInput | ShelterScalarWhereInput[]
+    id?: IntFilter<"Shelter"> | number
+    name?: StringFilter<"Shelter"> | string
+    address?: StringFilter<"Shelter"> | string
+    city_id?: IntFilter<"Shelter"> | number
+  }
+
+  export type CityCreateWithoutPersonInput = {
+    name: string
+    province: ProvinceCreateNestedOneWithoutCityInput
+    shelter?: ShelterCreateNestedManyWithoutCityInput
+  }
+
+  export type CityUncheckedCreateWithoutPersonInput = {
+    id?: number
+    name: string
+    province_id: number
+    shelter?: ShelterUncheckedCreateNestedManyWithoutCityInput
+  }
+
+  export type CityCreateOrConnectWithoutPersonInput = {
+    where: CityWhereUniqueInput
+    create: XOR<CityCreateWithoutPersonInput, CityUncheckedCreateWithoutPersonInput>
+  }
+
+  export type PetCreateWithoutOwned_byInput = {
+    name: string
+    birth_date: Date | string
+    gender: number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    description: string
+    has_spotlight: boolean
+    is_on_adoption?: boolean
+    traits?: TraitCreateNestedManyWithoutPetsInput
+  }
+
+  export type PetUncheckedCreateWithoutOwned_byInput = {
+    id?: number
+    name: string
+    birth_date: Date | string
+    gender: number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    description: string
+    has_spotlight: boolean
+    is_on_adoption?: boolean
+    traits?: TraitUncheckedCreateNestedManyWithoutPetsInput
+  }
+
+  export type PetCreateOrConnectWithoutOwned_byInput = {
+    where: PetWhereUniqueInput
+    create: XOR<PetCreateWithoutOwned_byInput, PetUncheckedCreateWithoutOwned_byInput>
+  }
+
+  export type PetCreateManyOwned_byInputEnvelope = {
+    data: PetCreateManyOwned_byInput | PetCreateManyOwned_byInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ShelterCreateWithoutPersonsInput = {
+    name: string
+    address: string
+    city: CityCreateNestedOneWithoutShelterInput
+  }
+
+  export type ShelterUncheckedCreateWithoutPersonsInput = {
+    id?: number
+    name: string
+    address: string
+    city_id: number
+  }
+
+  export type ShelterCreateOrConnectWithoutPersonsInput = {
+    where: ShelterWhereUniqueInput
+    create: XOR<ShelterCreateWithoutPersonsInput, ShelterUncheckedCreateWithoutPersonsInput>
+  }
+
+  export type CityUpsertWithoutPersonInput = {
+    update: XOR<CityUpdateWithoutPersonInput, CityUncheckedUpdateWithoutPersonInput>
+    create: XOR<CityCreateWithoutPersonInput, CityUncheckedCreateWithoutPersonInput>
+    where?: CityWhereInput
+  }
+
+  export type CityUpdateToOneWithWhereWithoutPersonInput = {
+    where?: CityWhereInput
+    data: XOR<CityUpdateWithoutPersonInput, CityUncheckedUpdateWithoutPersonInput>
+  }
+
+  export type CityUpdateWithoutPersonInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    province?: ProvinceUpdateOneRequiredWithoutCityNestedInput
+    shelter?: ShelterUpdateManyWithoutCityNestedInput
+  }
+
+  export type CityUncheckedUpdateWithoutPersonInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    province_id?: IntFieldUpdateOperationsInput | number
+    shelter?: ShelterUncheckedUpdateManyWithoutCityNestedInput
+  }
+
+  export type PetUpsertWithWhereUniqueWithoutOwned_byInput = {
+    where: PetWhereUniqueInput
+    update: XOR<PetUpdateWithoutOwned_byInput, PetUncheckedUpdateWithoutOwned_byInput>
+    create: XOR<PetCreateWithoutOwned_byInput, PetUncheckedCreateWithoutOwned_byInput>
+  }
+
+  export type PetUpdateWithWhereUniqueWithoutOwned_byInput = {
+    where: PetWhereUniqueInput
+    data: XOR<PetUpdateWithoutOwned_byInput, PetUncheckedUpdateWithoutOwned_byInput>
+  }
+
+  export type PetUpdateManyWithWhereWithoutOwned_byInput = {
+    where: PetScalarWhereInput
+    data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyWithoutOwned_byInput>
+  }
+
+  export type PetScalarWhereInput = {
+    AND?: PetScalarWhereInput | PetScalarWhereInput[]
+    OR?: PetScalarWhereInput[]
+    NOT?: PetScalarWhereInput | PetScalarWhereInput[]
+    id?: IntFilter<"Pet"> | number
+    name?: StringFilter<"Pet"> | string
+    birth_date?: DateTimeFilter<"Pet"> | Date | string
+    gender?: IntFilter<"Pet"> | number
+    species?: StringFilter<"Pet"> | string
+    weight?: IntFilter<"Pet"> | number
+    hair_type?: StringFilter<"Pet"> | string
+    hair_color?: StringFilter<"Pet"> | string
+    owner_id?: IntFilter<"Pet"> | number
+    description?: StringFilter<"Pet"> | string
+    has_spotlight?: BoolFilter<"Pet"> | boolean
+    is_on_adoption?: BoolFilter<"Pet"> | boolean
+  }
+
+  export type ShelterUpsertWithoutPersonsInput = {
+    update: XOR<ShelterUpdateWithoutPersonsInput, ShelterUncheckedUpdateWithoutPersonsInput>
+    create: XOR<ShelterCreateWithoutPersonsInput, ShelterUncheckedCreateWithoutPersonsInput>
+    where?: ShelterWhereInput
+  }
+
+  export type ShelterUpdateToOneWithWhereWithoutPersonsInput = {
+    where?: ShelterWhereInput
+    data: XOR<ShelterUpdateWithoutPersonsInput, ShelterUncheckedUpdateWithoutPersonsInput>
+  }
+
+  export type ShelterUpdateWithoutPersonsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: CityUpdateOneRequiredWithoutShelterNestedInput
+  }
+
+  export type ShelterUncheckedUpdateWithoutPersonsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city_id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PersonCreateWithoutPetInput = {
+    name: string
+    birth_date: Date | string
+    gender: number
+    address: string
+    phone: number
+    last_active_at?: Date | string
+    city: CityCreateNestedOneWithoutPersonInput
+    shelter?: ShelterCreateNestedOneWithoutPersonsInput
+  }
+
+  export type PersonUncheckedCreateWithoutPetInput = {
+    id?: number
+    name: string
+    birth_date: Date | string
+    gender: number
+    address: string
+    city_id: number
+    phone: number
+    last_active_at?: Date | string
+    shelter_id?: number | null
+  }
+
+  export type PersonCreateOrConnectWithoutPetInput = {
+    where: PersonWhereUniqueInput
+    create: XOR<PersonCreateWithoutPetInput, PersonUncheckedCreateWithoutPetInput>
+  }
+
+  export type TraitCreateWithoutPetsInput = {
+    name: string
+    code: number
+  }
+
+  export type TraitUncheckedCreateWithoutPetsInput = {
+    id?: number
+    name: string
+    code: number
+  }
+
+  export type TraitCreateOrConnectWithoutPetsInput = {
+    where: TraitWhereUniqueInput
+    create: XOR<TraitCreateWithoutPetsInput, TraitUncheckedCreateWithoutPetsInput>
+  }
+
+  export type PersonUpsertWithoutPetInput = {
+    update: XOR<PersonUpdateWithoutPetInput, PersonUncheckedUpdateWithoutPetInput>
+    create: XOR<PersonCreateWithoutPetInput, PersonUncheckedCreateWithoutPetInput>
+    where?: PersonWhereInput
+  }
+
+  export type PersonUpdateToOneWithWhereWithoutPetInput = {
+    where?: PersonWhereInput
+    data: XOR<PersonUpdateWithoutPetInput, PersonUncheckedUpdateWithoutPetInput>
+  }
+
+  export type PersonUpdateWithoutPetInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: IntFieldUpdateOperationsInput | number
+    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    city?: CityUpdateOneRequiredWithoutPersonNestedInput
+    shelter?: ShelterUpdateOneWithoutPersonsNestedInput
+  }
+
+  export type PersonUncheckedUpdateWithoutPetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    city_id?: IntFieldUpdateOperationsInput | number
+    phone?: IntFieldUpdateOperationsInput | number
+    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    shelter_id?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type TraitUpsertWithWhereUniqueWithoutPetsInput = {
+    where: TraitWhereUniqueInput
+    update: XOR<TraitUpdateWithoutPetsInput, TraitUncheckedUpdateWithoutPetsInput>
+    create: XOR<TraitCreateWithoutPetsInput, TraitUncheckedCreateWithoutPetsInput>
+  }
+
+  export type TraitUpdateWithWhereUniqueWithoutPetsInput = {
+    where: TraitWhereUniqueInput
+    data: XOR<TraitUpdateWithoutPetsInput, TraitUncheckedUpdateWithoutPetsInput>
+  }
+
+  export type TraitUpdateManyWithWhereWithoutPetsInput = {
+    where: TraitScalarWhereInput
+    data: XOR<TraitUpdateManyMutationInput, TraitUncheckedUpdateManyWithoutPetsInput>
+  }
+
+  export type TraitScalarWhereInput = {
+    AND?: TraitScalarWhereInput | TraitScalarWhereInput[]
+    OR?: TraitScalarWhereInput[]
+    NOT?: TraitScalarWhereInput | TraitScalarWhereInput[]
+    id?: IntFilter<"Trait"> | number
+    name?: StringFilter<"Trait"> | string
+    code?: IntFilter<"Trait"> | number
   }
 
   export type CityCreateWithoutShelterInput = {
-    id?: bigint | number
     name: string
     province: ProvinceCreateNestedOneWithoutCityInput
     person?: PersonCreateNestedManyWithoutCityInput
   }
 
   export type CityUncheckedCreateWithoutShelterInput = {
-    id?: bigint | number
+    id?: number
     name: string
-    province_id: bigint | number
+    province_id: number
     person?: PersonUncheckedCreateNestedManyWithoutCityInput
   }
 
@@ -10674,27 +10689,26 @@ export namespace Prisma {
   }
 
   export type PersonCreateWithoutShelterInput = {
-    id?: bigint | number
     name: string
     birth_date: Date | string
     gender: number
     address: string
-    phone: bigint | number
+    phone: number
     last_active_at?: Date | string
     city: CityCreateNestedOneWithoutPersonInput
-    pet?: PetCreateNestedManyWithoutPersonInput
+    pet?: PetCreateNestedManyWithoutOwned_byInput
   }
 
   export type PersonUncheckedCreateWithoutShelterInput = {
-    id?: bigint | number
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
     address: string
-    city_id: bigint | number
-    phone: bigint | number
+    city_id: number
+    phone: number
     last_active_at?: Date | string
-    pet?: PetUncheckedCreateNestedManyWithoutPersonInput
+    pet?: PetUncheckedCreateNestedManyWithoutOwned_byInput
   }
 
   export type PersonCreateOrConnectWithoutShelterInput = {
@@ -10719,16 +10733,15 @@ export namespace Prisma {
   }
 
   export type CityUpdateWithoutShelterInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     province?: ProvinceUpdateOneRequiredWithoutCityNestedInput
     person?: PersonUpdateManyWithoutCityNestedInput
   }
 
   export type CityUncheckedUpdateWithoutShelterInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    province_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    province_id?: IntFieldUpdateOperationsInput | number
     person?: PersonUncheckedUpdateManyWithoutCityNestedInput
   }
 
@@ -10749,22 +10762,29 @@ export namespace Prisma {
   }
 
   export type PetCreateWithoutTraitsInput = {
-    id?: bigint | number
     name: string
     birth_date: Date | string
     gender: number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
     description: string
     has_spotlight: boolean
     is_on_adoption?: boolean
-    person: PersonCreateNestedOneWithoutPetInput
+    owned_by: PersonCreateNestedOneWithoutPetInput
   }
 
   export type PetUncheckedCreateWithoutTraitsInput = {
-    id?: bigint | number
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
-    person_id: bigint | number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    owner_id: number
     description: string
     has_spotlight: boolean
     is_on_adoption?: boolean
@@ -10791,236 +10811,257 @@ export namespace Prisma {
     data: XOR<PetUpdateManyMutationInput, PetUncheckedUpdateManyWithoutTraitsInput>
   }
 
-  export type PersonCreateManyCityInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    address: string
-    phone: bigint | number
-    last_active_at?: Date | string
-    shelter_id?: bigint | number | null
-  }
-
-  export type ShelterCreateManyCityInput = {
-    id?: bigint | number
-    name: string
-    address: string
-  }
-
-  export type PersonUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
-    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    pet?: PetUpdateManyWithoutPersonNestedInput
-    shelter?: ShelterUpdateOneWithoutPersonsNestedInput
-  }
-
-  export type PersonUncheckedUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
-    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    shelter_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-    pet?: PetUncheckedUpdateManyWithoutPersonNestedInput
-  }
-
-  export type PersonUncheckedUpdateManyWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
-    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    shelter_id?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
-  }
-
-  export type ShelterUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    persons?: PersonUpdateManyWithoutShelterNestedInput
-  }
-
-  export type ShelterUncheckedUpdateWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-    persons?: PersonUncheckedUpdateManyWithoutShelterNestedInput
-  }
-
-  export type ShelterUncheckedUpdateManyWithoutCityInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    address?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type PetCreateManyPersonInput = {
-    id?: bigint | number
-    name: string
-    birth_date: Date | string
-    gender: number
-    description: string
-    has_spotlight: boolean
-    is_on_adoption?: boolean
-  }
-
-  export type PetUpdateWithoutPersonInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    has_spotlight?: BoolFieldUpdateOperationsInput | boolean
-    is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
-    traits?: TraitUpdateManyWithoutPetsNestedInput
-  }
-
-  export type PetUncheckedUpdateWithoutPersonInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    has_spotlight?: BoolFieldUpdateOperationsInput | boolean
-    is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
-    traits?: TraitUncheckedUpdateManyWithoutPetsNestedInput
-  }
-
-  export type PetUncheckedUpdateManyWithoutPersonInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
-    gender?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
-    has_spotlight?: BoolFieldUpdateOperationsInput | boolean
-    is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
-  }
-
-  export type TraitUpdateWithoutPetsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    code?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TraitUncheckedUpdateWithoutPetsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    code?: IntFieldUpdateOperationsInput | number
-  }
-
-  export type TraitUncheckedUpdateManyWithoutPetsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
-    name?: StringFieldUpdateOperationsInput | string
-    code?: IntFieldUpdateOperationsInput | number
-  }
-
   export type CityCreateManyProvinceInput = {
-    id?: bigint | number
+    id?: number
     name: string
   }
 
   export type CityUpdateWithoutProvinceInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     person?: PersonUpdateManyWithoutCityNestedInput
     shelter?: ShelterUpdateManyWithoutCityNestedInput
   }
 
   export type CityUncheckedUpdateWithoutProvinceInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     person?: PersonUncheckedUpdateManyWithoutCityNestedInput
     shelter?: ShelterUncheckedUpdateManyWithoutCityNestedInput
   }
 
   export type CityUncheckedUpdateManyWithoutProvinceInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
   }
 
-  export type PersonCreateManyShelterInput = {
-    id?: bigint | number
+  export type PersonCreateManyCityInput = {
+    id?: number
     name: string
     birth_date: Date | string
     gender: number
     address: string
-    city_id: bigint | number
-    phone: bigint | number
+    phone: number
+    last_active_at?: Date | string
+    shelter_id?: number | null
+  }
+
+  export type ShelterCreateManyCityInput = {
+    id?: number
+    name: string
+    address: string
+  }
+
+  export type PersonUpdateWithoutCityInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: IntFieldUpdateOperationsInput | number
+    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    pet?: PetUpdateManyWithoutOwned_byNestedInput
+    shelter?: ShelterUpdateOneWithoutPersonsNestedInput
+  }
+
+  export type PersonUncheckedUpdateWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: IntFieldUpdateOperationsInput | number
+    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    shelter_id?: NullableIntFieldUpdateOperationsInput | number | null
+    pet?: PetUncheckedUpdateManyWithoutOwned_byNestedInput
+  }
+
+  export type PersonUncheckedUpdateManyWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    address?: StringFieldUpdateOperationsInput | string
+    phone?: IntFieldUpdateOperationsInput | number
+    last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    shelter_id?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type ShelterUpdateWithoutCityInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    persons?: PersonUpdateManyWithoutShelterNestedInput
+  }
+
+  export type ShelterUncheckedUpdateWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    persons?: PersonUncheckedUpdateManyWithoutShelterNestedInput
+  }
+
+  export type ShelterUncheckedUpdateManyWithoutCityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PetCreateManyOwned_byInput = {
+    id?: number
+    name: string
+    birth_date: Date | string
+    gender: number
+    species: string
+    weight: number
+    hair_type: string
+    hair_color: string
+    description: string
+    has_spotlight: boolean
+    is_on_adoption?: boolean
+  }
+
+  export type PetUpdateWithoutOwned_byInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    has_spotlight?: BoolFieldUpdateOperationsInput | boolean
+    is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
+    traits?: TraitUpdateManyWithoutPetsNestedInput
+  }
+
+  export type PetUncheckedUpdateWithoutOwned_byInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    has_spotlight?: BoolFieldUpdateOperationsInput | boolean
+    is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
+    traits?: TraitUncheckedUpdateManyWithoutPetsNestedInput
+  }
+
+  export type PetUncheckedUpdateManyWithoutOwned_byInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
+    gender?: IntFieldUpdateOperationsInput | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    has_spotlight?: BoolFieldUpdateOperationsInput | boolean
+    is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type TraitUpdateWithoutPetsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TraitUncheckedUpdateWithoutPetsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type TraitUncheckedUpdateManyWithoutPetsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PersonCreateManyShelterInput = {
+    id?: number
+    name: string
+    birth_date: Date | string
+    gender: number
+    address: string
+    city_id: number
+    phone: number
     last_active_at?: Date | string
   }
 
   export type PersonUpdateWithoutShelterInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
     city?: CityUpdateOneRequiredWithoutPersonNestedInput
-    pet?: PetUpdateManyWithoutPersonNestedInput
+    pet?: PetUpdateManyWithoutOwned_byNestedInput
   }
 
   export type PersonUncheckedUpdateWithoutShelterInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    city_id?: IntFieldUpdateOperationsInput | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    pet?: PetUncheckedUpdateManyWithoutPersonNestedInput
+    pet?: PetUncheckedUpdateManyWithoutOwned_byNestedInput
   }
 
   export type PersonUncheckedUpdateManyWithoutShelterInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
     address?: StringFieldUpdateOperationsInput | string
-    city_id?: BigIntFieldUpdateOperationsInput | bigint | number
-    phone?: BigIntFieldUpdateOperationsInput | bigint | number
+    city_id?: IntFieldUpdateOperationsInput | number
+    phone?: IntFieldUpdateOperationsInput | number
     last_active_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PetUpdateWithoutTraitsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
-    person?: PersonUpdateOneRequiredWithoutPetNestedInput
+    owned_by?: PersonUpdateOneRequiredWithoutPetNestedInput
   }
 
   export type PetUncheckedUpdateWithoutTraitsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
-    person_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    owner_id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PetUncheckedUpdateManyWithoutTraitsInput = {
-    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     birth_date?: DateTimeFieldUpdateOperationsInput | Date | string
     gender?: IntFieldUpdateOperationsInput | number
-    person_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    species?: StringFieldUpdateOperationsInput | string
+    weight?: IntFieldUpdateOperationsInput | number
+    hair_type?: StringFieldUpdateOperationsInput | string
+    hair_color?: StringFieldUpdateOperationsInput | string
+    owner_id?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
     has_spotlight?: BoolFieldUpdateOperationsInput | boolean
     is_on_adoption?: BoolFieldUpdateOperationsInput | boolean

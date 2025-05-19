@@ -1,4 +1,3 @@
-// src/pets/pets.service.ts
 import {
   Injectable,
   InternalServerErrorException,
@@ -7,6 +6,8 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePetDto } from './dto/create-pet.dto';
 import { Prisma } from 'src/generated';
+import { FilterPetsDto } from './dto/filter-pet.dto';
+import { subYears, startOfDay, endOfDay } from 'date-fns';
 
 @Injectable()
 export class PetsService {
@@ -19,12 +20,16 @@ export class PetsService {
           name: data.name,
           birth_date: new Date(data.birth_date),
           gender: data.gender,
-          person_id: BigInt(data.person_id),
+          species: data.species,
+          weight: data.weight,
+          hair_type: data.hair_type,
+          hair_color: data.hair_color,
+          owner_id: data.owner_id,
           description: data.description,
           has_spotlight: data.has_spotlight,
           traits: {
             connect: data.trait_ids.map((id) => ({
-              id: BigInt(id),
+              id,
             })),
           },
         },
@@ -35,21 +40,21 @@ export class PetsService {
         pet: {
           ...newPet,
           id: newPet.id.toString(),
-          person_id: newPet.person_id.toString(),
+          owner_id: newPet.owner_id.toString(),
         },
       };
     } catch (error) {
       if (error instanceof Prisma.PrismaClientKnownRequestError) {
         if (error.code === 'P2003') {
           throw new BadRequestException(
-            'Invalid foreign key reference (person_id or trait_ids)',
+            'Invalid foreign key reference (owner_id or trait_ids)',
           );
         }
       }
 
       if (error.code === 'P2025') {
         throw new BadRequestException(
-          'One or more related records not found (person or traits)',
+          'One or more related records not found (owner or traits)',
         );
       }
 
@@ -65,7 +70,7 @@ export class PetsService {
       return pets.map((pet) => ({
         ...pet,
         id: pet.id.toString(),
-        person_id: pet.person_id ? pet.person_id.toString() : null,
+        owner_id: pet.owner_id ? pet.owner_id.toString() : null,
       }));
     } catch (error) {
       console.error('Error fetching pets:', error);
@@ -76,7 +81,7 @@ export class PetsService {
   async getPetById(id: string) {
     try {
       const pet = await this.prisma.pet.findUnique({
-        where: { id: BigInt(id) },
+        where: { id: parseInt(id, 10) },
       });
 
       if (!pet) return null;
@@ -84,10 +89,41 @@ export class PetsService {
       return {
         ...pet,
         id: pet.id.toString(),
-        person_id: pet.person_id ? pet.person_id.toString() : null,
+        owner_id: pet.owner_id ? pet.owner_id.toString() : null,
       };
     } catch (error) {
       console.error('Error fetching pet by id:', error);
+      throw new InternalServerErrorException('Could not retrieve pet');
+    }
+  }
+
+  async filterPetsByParams(filters: FilterPetsDto) {
+    try {
+      const where: any = {};
+
+      if (filters.gender !== undefined) where.gender = filters.gender;
+      if (filters.species) where.species = filters.species;
+      if (filters.weight !== undefined) where.weight = filters.weight;
+      if (filters.hairType) where.hair_type = filters.hairType;
+      if (filters.hairColor) where.hair_color = filters.hairColor;
+
+      // For province and city, join via related models
+      if (filters.province) {
+        where.owned_by = {
+          city: {
+            province_id: filters.province,
+          },
+        };
+      }
+      if (filters.city) {
+        where.owned_by = where.owned_by || {};
+        where.owned_by.city = { id: filters.city };
+      }
+
+      const pets = await this.prisma.pet.findMany({ where });
+      return pets;
+    } catch (error) {
+      console.error('Error fetching pets', error);
       throw new InternalServerErrorException('Could not retrieve pets');
     }
   }

@@ -1,15 +1,15 @@
-// src/pets/pets.controller.ts
 import {
   Body,
   Controller,
   Get,
   NotFoundException,
   Param,
-  ParseIntPipe,
   Post,
+  Query,
 } from '@nestjs/common';
 import { PetsService } from './pets.service';
 import { CreatePetDto } from './dto/create-pet.dto';
+import { FilterPetsDto } from './dto/filter-pet.dto';
 
 @Controller('pets')
 export class PetsController {
@@ -32,5 +32,10 @@ export class PetsController {
       throw new NotFoundException(`Pet with id ${id} not found`);
     }
     return pet;
+  }
+
+  @Get('/filter')
+  async filterPets(@Query() filters: FilterPetsDto) {
+    return this.petsService.filterPetsByParams(filters);
   }
 }

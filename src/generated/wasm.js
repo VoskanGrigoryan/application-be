@@ -20,11 +20,11 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.8.1
+ * Prisma Client JS version: 6.8.2
  * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.8.1",
+  client: "6.8.2",
   engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
@@ -122,7 +122,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.CityScalarFieldEnum = {
   id: 'id',
-  city: 'city',
+  name: 'name',
   province_id: 'province_id'
 };
 
@@ -134,7 +134,8 @@ exports.Prisma.PersonScalarFieldEnum = {
   address: 'address',
   city_id: 'city_id',
   phone: 'phone',
-  last_active_at: 'last_active_at'
+  last_active_at: 'last_active_at',
+  shelter_id: 'shelter_id'
 };
 
 exports.Prisma.PetScalarFieldEnum = {
@@ -144,7 +145,8 @@ exports.Prisma.PetScalarFieldEnum = {
   gender: 'gender',
   person_id: 'person_id',
   description: 'description',
-  has_spotlight: 'has_spotlight'
+  has_spotlight: 'has_spotlight',
+  is_on_adoption: 'is_on_adoption'
 };
 
 exports.Prisma.ProvinceScalarFieldEnum = {
@@ -156,8 +158,7 @@ exports.Prisma.ShelterScalarFieldEnum = {
   id: 'id',
   name: 'name',
   address: 'address',
-  city_id: 'city_id',
-  person_id: 'person_id'
+  city_id: 'city_id'
 };
 
 exports.Prisma.TraitScalarFieldEnum = {
@@ -176,14 +177,19 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  city: 'city',
-  person: 'person',
-  pet: 'pet',
-  province: 'province',
-  shelter: 'shelter',
-  trait: 'trait'
+  City: 'City',
+  Person: 'Person',
+  Pet: 'Pet',
+  Province: 'Province',
+  Shelter: 'Shelter',
+  Trait: 'Trait'
 };
 
 /**

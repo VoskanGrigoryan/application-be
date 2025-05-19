@@ -8,62 +8,62 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model city {
-  id          BigInt    @id
-  city        String    @db.VarChar(255)
+model City {
+  id          BigInt    @id @default(autoincrement())
+  name        String    @db.VarChar(255)
   province_id BigInt
-  province    province  @relation(fields: [province_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "city_province_id_foreign")
-  person      person[]
-  shelter     shelter[]
+  province    Province  @relation(fields: [province_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "city_province_id_foreign")
+  person      Person[]
+  shelter     Shelter[]
 }
 
-model person {
-  id             BigInt    @id @default(autoincrement())
-  name           String    @db.VarChar(255)
-  birth_date     DateTime  @db.Date
-  gender         Int       @db.SmallInt
-  address        String    @db.VarChar(255)
+model Person {
+  id             BigInt   @id @default(autoincrement())
+  name           String   @db.VarChar(255)
+  birth_date     DateTime @db.Date
+  gender         Int      @db.SmallInt
+  address        String   @db.VarChar(255)
   city_id        BigInt
   phone          BigInt
-  last_active_at DateTime  @default(now()) @db.Timestamp(0)
-  city           city      @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "person_city_id_foreign")
-  pet            pet[]
-  shelter        shelter[]
+  last_active_at DateTime @default(now()) @db.Timestamp(0)
+  city           City     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "person_city_id_foreign")
+  pet            Pet[]
+  shelter_id     BigInt?
+  shelter        Shelter? @relation(fields: [shelter_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "person_shelter_id_foreign")
 }
 
-model pet {
-  id            BigInt   @id @default(autoincrement())
-  name          String   @db.VarChar(255)
-  birth_date    DateTime @db.Date
-  gender        Int      @db.SmallInt
-  person_id     BigInt
-  description   String   @db.VarChar(255)
-  has_spotlight Boolean
-
-  person person  @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pet_person_id_foreign")
-  traits trait[] // many-to-many relationship
+model Pet {
+  id             BigInt   @id @default(autoincrement())
+  name           String   @db.VarChar(255)
+  birth_date     DateTime @db.Date
+  gender         Int      @db.SmallInt
+  person_id      BigInt
+  description    String   @db.VarChar(255)
+  has_spotlight  Boolean
+  is_on_adoption Boolean  @default(true)
+  person         Person   @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "pet_person_id_foreign")
+  traits         Trait[] // many-to-many relationship
 }
 
-model province {
-  id       BigInt @id
+model Province {
+  id       BigInt @id @default(autoincrement())
   province String @db.VarChar(255)
-  city     city[]
+  city     City[]
 }
 
-model shelter {
-  id        BigInt @id
-  name      String @db.VarChar(255)
-  address   String @db.VarChar(255)
-  city_id   BigInt
-  person_id BigInt
-  city      city   @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "shelter_city_id_foreign")
-  person    person @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "shelter_person_id_foreign")
+model Shelter {
+  id      BigInt   @id @default(autoincrement())
+  name    String   @db.VarChar(255)
+  address String   @db.VarChar(255)
+  city_id BigInt
+  city    City     @relation(fields: [city_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "shelter_city_id_foreign")
+  persons Person[]
 }
 
-model trait {
+model Trait {
   id   BigInt @id @default(autoincrement())
   name String @db.VarChar(255)
   code Int    @db.SmallInt
 
-  pets pet[] //  many-to-many relationship
+  pets Pet[] //  many-to-many relationship
 }
